@@ -1,0 +1,36 @@
+/* Cocktail */
+
+.product {
+  background: var(--mainWhite);
+  margin-bottom: 2rem;
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-radius: var(--mainBorderRadius);
+}
+.product:hover {
+  box-shadow: var(--darkShadow);
+}
+.product img {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: var(--mainBorderRadius);
+  border-top-right-radius: var(--mainBorderRadius);
+}
+.product_footer {
+  padding: 1.5rem;
+}
+.product_footer h3,
+.product_footer h4,
+.product_footer p {
+  margin-bottom: 0.3rem;
+}
+.product_footer h3 {
+  font-size: 2rem;
+}
+.product_footer p {
+  color: var(--darkGrey);
+  margin-bottom: 0.5rem;
+}

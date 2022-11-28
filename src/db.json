@@ -1,0 +1,201 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Áo khóa"
+    },
+    {
+      "id": 2,
+      "name": "Công sở"
+    },
+    {
+      "id": 3,
+      "name": "Thể thao"
+    },
+    {
+      "id": 4,
+      "name": "Bikini"
+    },
+    {
+      "id": 5,
+      "name": "Váy"
+    },
+    {
+      "id": 6,
+      "name": "Quần"
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "name": "Red",
+      "code": "#FF0000"
+    },
+    {
+      "id": 2,
+      "name": "Blue",
+      "code": "#0000FF"
+    },
+    {
+      "id": 3,
+      "name": "Green",
+      "code": "#00FF00"
+    },
+    {
+      "id": 4,
+      "name": "Yellow",
+      "code": "#FFFF00"
+    },
+    {
+      "id": 5,
+      "name": "Black",
+      "code": "#000000"
+    },
+    {
+      "id": 6,
+      "name": "White",
+      "code": "#FFFFFF"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "product_name": "Sơ mi",
+      "product_description": "No",
+      "colors": [
+        1,
+        2,
+        3
+      ],
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png",
+        "https://image/image3.png"
+      ],
+      "category_id": 5
+    },
+    {
+      "id": 2,
+      "product_name": "Váy",
+      "product_description": "No comment",
+      "colors": [
+        1,
+        2
+      ],
+      "sizes": [
+        1,
+        2,
+        3
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png"
+      ],
+      "category_id": 6
+    },
+    {
+      "id": "5",
+      "product_name": "Quần Âu",
+      "product_description": "No",
+      "colors": [
+        1,
+        2,
+        3
+      ],
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png",
+        "https://image/image3.png"
+      ],
+      "category_id": 6
+    },
+    {
+      "id": "6",
+      "product_name": "",
+      "product_description": "No",
+      "colors": [
+        1,
+        2,
+        3
+      ],
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png",
+        "https://image/image3.png"
+      ],
+      "category_id": 6
+    },
+    {
+      "product_name": "",
+      "product_description": "No",
+      "colors": [
+        1,
+        2,
+        3
+      ],
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png",
+        "https://image/image3.png"
+      ],
+      "category_id": 5,
+      "id": "7"
+    },
+    {
+      "id": "8",
+      "product_name": "",
+      "product_description": "No",
+      "colors": [
+        1,
+        2,
+        3
+      ],
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "img_urls": [
+        "https://image/image1.png",
+        "https://image/image2.png",
+        "https://image/image3.png"
+      ],
+      "category_id": 1
+    }
+  ]
+}
