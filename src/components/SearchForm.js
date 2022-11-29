@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import Styles from '../css/search.module.css';
+import { useGlobalContext } from '../context';
 
 const SearchForm = () => {
-    const [searchText, setSearchText] = useState("");
+    const { searchText, setSearchText } = useGlobalContext();
     const handleChangeSearch = (event) => {
         setSearchText(event.target.value);
     }

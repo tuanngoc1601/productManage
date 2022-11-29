@@ -6,27 +6,24 @@ import Product from './Product';
 import { useGlobalContext } from '../context';
 
 const ProductList = () => {
-    const { loading, setLoading } = useGlobalContext();
+    const { loading, setLoading , searchText } = useGlobalContext();
     const [products, setProducts] = useState([]);
-
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
             const response = await fetch('https://6382e0fd1ada9475c8f43f7b.mockapi.io/api/products');
             const data = await response.json();
-            console.log(data);
             if(data) {
                 const newData = data.map(product => {
-                    const { product_id, product_name, product_description, color_id, size_id, category_id, img_urls } = product;
-                    console.log(typeof img_urls);
+                    const { product_id, product_name, product_description, color, size, category_id, img_urls } = product;
                     return ({
                         id: product_id,
                         name: product_name,
                         images: img_urls,
                         info: product_description,
-                        color_id: color_id,
+                        color: color,
                         category_id: category_id,
-                        size_id: size_id
+                        size: size
                     })
                 })
                 setProducts(newData);
@@ -37,6 +34,19 @@ const ProductList = () => {
         };
         fetchProducts();
     }, []);
+
+    useEffect(() => {
+        let newProducts = products;
+        if(searchText !== '') {
+            let text = searchText;
+            let newListProducts = products.filter((product) => {
+                return (product.name.toUpperCase().indexOf(text.toLowerCase()) !== -1);
+            })
+            // setProducts(newListProducts);
+        } else {
+            setProducts(newProducts);
+        }
+    }, [searchText]);
 
     if(loading) {
         return (

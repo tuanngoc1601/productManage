@@ -5,6 +5,7 @@ import User from './page/User';
 import Admin from './page/Admin';
 import Error from './page/Error';
 import About from './page/About';
+import SingleProduct from './page/SingleProduct';
 // import component
 import Navbar from './components/Navbar';
 
@@ -16,9 +17,7 @@ function App() {
                 <Route path="/" element={ <User /> }/>
                 <Route path="/admin" element={ <Admin /> }/>
                 <Route path="/about" element={ <About /> }/>
-                {/* <Route exact path="/cocktail/:id">
-                    <SingleCocktail />
-                </Route> */}
+                <Route path="/products/:id" element={ <SingleProduct /> } />
                 <Route path="/error" element={ <Error /> }/>
             </Routes>
         </>
