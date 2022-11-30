@@ -8,6 +8,7 @@ import { useGlobalContext } from "../context";
 const ProductList = () => {
   const { loading, setLoading, searchText } = useGlobalContext();
   const [products, setProducts] = useState([]);
+  const [productList, setProductList] =useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -19,8 +20,8 @@ const ProductList = () => {
             product_id,
             product_name,
             product_description,
-            color,
-            size,
+            color_id,
+            size_id,
             category_id,
             img_urls,
           } = product;
@@ -29,11 +30,12 @@ const ProductList = () => {
             name: product_name,
             images: img_urls,
             info: product_description,
-            color: color,
+            color_id: color_id,
             category_id: category_id,
-            size: size,
+            size_id: size_id,
           };
         });
+        setProductList(newData);
         setProducts(newData);
         setLoading(false);
       } else {
@@ -44,17 +46,17 @@ const ProductList = () => {
   }, []);
 
   useEffect(() => {
-    let newProducts = products;
-    if (searchText !== "") {
-      let text = searchText;
-      let newListProducts = products.filter((product) => {
-        return product.name.toUpperCase().indexOf(text.toLowerCase()) !== -1;
-      });
-      // setProducts(newListProducts);
+    let newProducts = productList;
+    if(searchText !== '') {
+        let text = searchText;
+        let newListProducts = newProducts.filter((product) => {
+            return (product.name.toUpperCase().indexOf(text.toUpperCase()) !== -1);
+        })
+        setProducts(newListProducts);
     } else {
-      setProducts(newProducts);
+        setProducts(newProducts);
     }
-  }, [searchText]);
+}, [searchText]);
 
   if (loading) {
     return <Loading />;

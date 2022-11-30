@@ -2,12 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Row, Col, Container, Stack } from "react-bootstrap";
+import ProductService from "../services/ProductService";
 import Loading from "../components/Loading";
 import Styles from "../css/singleProduct.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css";
 
-const SingleProduct = () => {
+const SingleProduct = ({ colors, sizes }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState();
@@ -58,6 +59,9 @@ const SingleProduct = () => {
     return <h2 className="section-title">no cocktail to display</h2>;
   }
   const { name, info, color, size, img_urls } = product;
+  const listColors = ProductService.getColorByIds(color, colors);
+  const listSizes = ProductService.getSizeByIds(size, sizes);
+  console.log(listSizes);
   return (
     <section className={`${Styles.section} ${Styles.product_section}`}>
       <Link to="/" className="btn btn-primary">
@@ -99,25 +103,25 @@ const SingleProduct = () => {
             </Row>
             <Row className={`${Styles.border_top} ${Styles.border_bottom}`}>
               <Stack direction="horizontal" gap={3}>
-                {color.map((item, index) => {
+                {listColors.map((item, index) => {
                   return (
                     <div
                       key={index}
                       className={
-                        colorProduct === item
+                        colorProduct === item.color_code
                           ? `${Styles.color_wrapper} ${Styles.active_color}`
                           : `${Styles.color_wrapper}`
                       }
                     >
                       <div
                         className={Styles.pick_color}
-                        style={{ backgroundColor: `${item}` }}
+                        style={{ backgroundColor: `${item.color_code}` }}
                       >
                         <input
                           type="radio"
                           className={Styles.input_radio}
-                          value={item}
-                          checked={colorProduct === item}
+                          value={item.color_code}
+                          checked={colorProduct === item.color_code}
                           name="pick_color"
                           onChange={handleChangeColor}
                         />
@@ -129,12 +133,12 @@ const SingleProduct = () => {
             </Row>
             <Row className={`${Styles.border_top} ${Styles.border_bottom}`}>
               <Stack direction="horizontal" gap={3}>
-                {size.map((item, index) => {
+                {listSizes.map((item, index) => {
                   return (
                     <div
                       key={index}
                       className={
-                        sizeProduct === item
+                        sizeProduct === item.size_name
                           ? `${Styles.size} ${Styles.active_size}`
                           : `${Styles.size}`
                       }
@@ -142,9 +146,9 @@ const SingleProduct = () => {
                       <input
                         type="radio"
                         className={Styles.input_radio_size}
-                        value={item}
-                        id={item}
-                        checked={sizeProduct === item}
+                        value={item.size_name}
+                        id={item.size_name}
+                        checked={sizeProduct === item.size_name}
                         name="pick_size"
                         onChange={handleChangeSize}
                       />
@@ -155,9 +159,9 @@ const SingleProduct = () => {
                           textAlign: "center",
                           lineHeight: "45px",
                         }}
-                        htmlFor={item}
+                        htmlFor={item.size_name}
                       >
-                        {item}
+                        {item.size_name}
                       </label>
                     </div>
                   );
