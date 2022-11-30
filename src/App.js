@@ -10,8 +10,7 @@ import CreateProductForm from "./page/Admin/CreateProductForm";
 import UpdateProductForm from "./page/Admin/UpdateProductForm";
 import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
 function App() {
-  const { colors, sizes, categories, products } = useGetAllProductInfo();
-
+  const { colors, sizes, categories } = useGetAllProductInfo();
   return (
     <>
       <Navbar />

@@ -7,4 +7,11 @@ const axiosClient = axios.create({
   },
 });
 
-export default axiosClient;
+const axiosSubClient = axios.create({
+  baseURL: process.env.REACT_APP_SUB_API_URL,
+  headers: {
+    "conten-type": "application/json",
+  },
+});
+
+export { axiosClient, axiosSubClient };

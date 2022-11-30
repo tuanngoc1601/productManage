@@ -14,14 +14,25 @@ const useGetAllProductInfo = () => {
   const [products, setProducts] = useRecoilState(ProductsList);
   useEffect(() => {
     const getData = async () => {
-      const { data: categories } = await ProductApi.getAllCategories();
-      const { data: colors } = await ProductApi.getAllColors();
-      const { data: sizes } = await ProductApi.getAllSizes();
-      const { data: products } = await ProductApi.getAllProducts();
-      setCateogries(categories);
-      setColors(colors);
-      setSizes(sizes);
-      setProducts(products);
+      try {
+        const { data: categories } = await ProductApi.getAllCategories();
+        const { data: colors } = await ProductApi.getAllColors();
+        const { data: sizes } = await ProductApi.getAllSizes();
+        const { data: products } = await ProductApi.getAllProducts();
+        const { data: prices } = await ProductApi.getAllPrice();
+        const newProducts = products.map((product) => {
+          const price = prices.find(
+            (price) => price.Product_id == product.product_id
+          );
+          return { ...product, price: price?.price };
+        });
+        setCateogries(categories);
+        setColors(colors);
+        setSizes(sizes);
+        setProducts(newProducts);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getData();
   }, []);

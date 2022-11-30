@@ -64,7 +64,7 @@ ul {
     list-style-type: none;
 }
 a {
-    text-decoration: none;
+    text-decoration: none!important;
     color: var(--mainBlack);
 }
 img {
@@ -129,3 +129,22 @@ Buttons
     background: var(--primaryLightColor);
     border-color: var(--primaryLightColor);
 }
+
+.text-overflow_3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .text-overflow_2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .text-overflow_1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }

@@ -82,7 +82,7 @@ const UpdateProductForm = () => {
             }
           />
           <span className="mt-2 text-sm text-yellow-300">
-            Do not execeed 20 characters when entering the product name
+            Do not execeed 50 characters when entering the product name
           </span>
         </div>
 

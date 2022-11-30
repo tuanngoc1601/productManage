@@ -22,7 +22,7 @@ const Admin = () => {
   return (
     <div className="mt-12 px-44 w-full mb-12">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-red-500 text-xl font-bold">Manage products</h1>
+        <h1 className="text-red-500 text-3xl font-bold">Manage products</h1>
         <button className="px-3 py-2 rounded-md bg-blue-500  font-semibold hover:bg-blue-600">
           <Link to="/admin/create-product" className="text-white  no-underline">
             Create product
