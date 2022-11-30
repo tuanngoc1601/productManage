@@ -1,28 +1,38 @@
 import axiosClient from "./axiosClient";
 class ProductApi {
-  static getAllProducts = () => {
+  static getAllProducts = async () => {
     const url = "/products";
-    return axiosClient.get(url);
+    return await axiosClient.get(url);
   };
-  static getProductById = (id) => {
+  static getProductById = async (id) => {
     const url = `/products/${id}`;
-    return axiosClient.get(url);
+    return await axiosClient.get(url);
   };
-  static getAllColors = () => {
+  static getAllColors = async () => {
     const url = "/colors";
-    return axiosClient.get(url);
+    return await axiosClient.get(url);
   };
-  static getAllSizes = () => {
+  static getAllSizes = async () => {
     const url = "/size";
-    return axiosClient.get(url);
+    return await axiosClient.get(url);
   };
-  static getAllCategories = () => {
+  static getAllCategories = async () => {
     const url = "/categories";
-    return axiosClient.get(url);
+    return await axiosClient.get(url);
   };
-  static createProduct = (data) => {
+  static createProduct = async (data) => {
     const url = "/products";
-    return axiosClient.post(url, data);
+    return await axiosClient.post(url, data);
+  };
+
+  static updateProduct = async (data) => {
+    const url = `/products/${data.product_id}`;
+    return await axiosClient.put(url, data);
+  };
+
+  static deleteProduct = async (id) => {
+    const url = `/products/${id}`;
+    return await axiosClient.delete(url);
   };
 }
 

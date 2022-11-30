@@ -1,11 +1,24 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import useGetAllProductInfo from "../../hooks/useGetAllProductInfo";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 import ProductTable from "./ProductTable";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import {
+  ProductsList,
+  ColorsList,
+  SizesList,
+  CategoriesList,
+} from "../../recoil/Products";
 const Admin = () => {
-  const { products, sizes, colors, categories } = useGetAllProductInfo();
+  const products = useRecoilValue(ProductsList);
+  const sizes = useRecoilValue(SizesList);
+  const colors = useRecoilValue(ColorsList);
+  const categories = useRecoilValue(CategoriesList);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
   return (
-    <div className="mt-12 px-44 w-full">
+    <div className="mt-12 px-44 w-full mb-12">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-red-500 text-xl font-bold">Manage products</h1>
         <button className="px-3 py-2 rounded-md bg-blue-500  font-semibold hover:bg-blue-600">
@@ -19,7 +32,15 @@ const Admin = () => {
         colors={colors}
         sizes={sizes}
         categories={categories}
+        setIsOpenDeleteModal={setIsOpenDeleteModal}
+        setDeleteItem={setDeleteItem}
       />
+      {isOpenDeleteModal && (
+        <DeleteConfirmModal
+          setIsOpenDeleteModal={setIsOpenDeleteModal}
+          deleteItem={deleteItem}
+        />
+      )}
     </div>
   );
 };

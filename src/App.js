@@ -8,8 +8,11 @@ import About from "./page/About";
 // import component
 import Navbar from "./components/Navbar";
 import CreateProductForm from "./page/Admin/CreateProductForm";
-
+import UpdateProductForm from "./page/Admin/UpdateProductForm";
+import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
 function App() {
+  const { products, sizes, colors, categories } = useGetAllProductInfo();
+
   return (
     <>
       <Navbar />
@@ -17,6 +20,10 @@ function App() {
         <Route path="/" element={<User />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/create-product" element={<CreateProductForm />} />
+        <Route
+          path="/admin/update-product/:productId"
+          element={<UpdateProductForm />}
+        />
         <Route path="/about" element={<About />} />
         {/* <Route exact path="/cocktail/:id">
                     <SingleCocktail />

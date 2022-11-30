@@ -1,11 +1,17 @@
 import ProductApi from "../api/ProductApi";
 import { useEffect, useState } from "react";
-
+import { useRecoilState } from "recoil";
+import {
+  ProductsList,
+  ColorsList,
+  SizesList,
+  CategoriesList,
+} from "../recoil/Products";
 const useGetAllProductInfo = () => {
-  const [categories, setCateogries] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCateogries] = useRecoilState(CategoriesList);
+  const [colors, setColors] = useRecoilState(ColorsList);
+  const [sizes, setSizes] = useRecoilState(SizesList);
+  const [products, setProducts] = useRecoilState(ProductsList);
   useEffect(() => {
     const getData = async () => {
       const { data: categories } = await ProductApi.getAllCategories();

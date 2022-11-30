@@ -1,19 +1,43 @@
 import Select from "react-select";
 import useGetAllProductInfo from "../../hooks/useGetAllProductInfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { storage } from "../../firebase.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import ProductApi from "../../api/ProductApi";
 import Loading from "../../components/Loading";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ProductService from "../../services/ProductService";
-const CreateProductForm = () => {
+const UpdateProductForm = () => {
   const navigate = useNavigate();
-  const { categories, colors, sizes } = useGetAllProductInfo();
+  const { productId } = useParams();
+  const { categories, colors, sizes, products } = useGetAllProductInfo();
   const [imgUrls, setImgUrls] = useState([]);
-  const [product, setProduct] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [productUpdate, setProductUpdate] = useState({});
+  const [isUploading, setIsUploading] = useState(false);
+  const [selectSize, setSelectSize] = useState([]);
+  const [selectColor, setSelectColor] = useState([]);
+  const [selectCategory, setSelectCategory] = useState();
 
+  useEffect(() => {
+    const product = products.find((product) => product.product_id == productId);
+    setProductUpdate(product);
+  }, [products, productId]);
+
+  useEffect(() => {
+    setSelectSize(ProductService.getSizeByIds(productUpdate?.size_id, sizes));
+    setSelectColor(
+      ProductService.getColorByIds(productUpdate?.color_id, colors)
+    );
+    const category = ProductService.getCatgoryById(
+      productUpdate?.category_id,
+      categories
+    );
+    setSelectCategory({
+      label: category?.category_name,
+      value: category?.category_id,
+    });
+    setImgUrls(productUpdate?.img_urls);
+  }, [productUpdate, categories, colors, sizes]);
   const handleChangeImg = async (e) => {
     try {
       const file = e.target.files[0];
@@ -26,7 +50,7 @@ const CreateProductForm = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             setImgUrls((prev) => [...prev, url]);
-            setProduct((prev) => ({
+            setProductUpdate((prev) => ({
               ...prev,
               img_urls: [...prev.img_urls, url],
             }));
@@ -37,17 +61,21 @@ const CreateProductForm = () => {
       console.log("Error uploading file: ", error);
     }
   };
+
   return (
     <div className="mt-12 px-44 w-full flex relative">
       <div className="w-1/2 pr-20">
         <div className="flex flex-col mb-4">
           <label className="text-xl font-medium mb-2">Product name</label>
           <input
-            required
+            value={productUpdate?.product_name}
             placeholder="Enter product name"
             className="px-2 py-2 rounded-md border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500"
             onChange={(e) =>
-              setProduct({ ...product, product_name: e.target.value })
+              setProductUpdate({
+                ...productUpdate,
+                product_name: e.target.value,
+              })
             }
           />
           <span className="mt-2">
@@ -61,7 +89,10 @@ const CreateProductForm = () => {
             options={ProductService.convertCategoriesToSelectElementData(
               categories
             )}
-            onChange={(e) => setProduct({ ...product, category_id: e.value })}
+            value={selectCategory}
+            onChange={(e) =>
+              setProductUpdate({ ...productUpdate, category_id: e.value })
+            }
           />
         </div>
 
@@ -69,10 +100,11 @@ const CreateProductForm = () => {
           <label className="text-xl font-medium mb-2">Add color</label>
           <Select
             options={ProductService.convertColorsToSelectElementData(colors)}
+            value={ProductService.convertColorsToSelectElementData(selectColor)}
             isMulti
             onChange={(e) => {
               const colorIds = e.map((color) => color.value);
-              setProduct({ ...product, color_id: colorIds });
+              setProductUpdate({ ...productUpdate, color_id: colorIds });
             }}
             styles={{
               multiValueLabel: (styles, { data }) => {
@@ -96,10 +128,14 @@ const CreateProductForm = () => {
         <div className="flex flex-col ">
           <label className="text-xl font-medium mb-2">Description</label>
           <textarea
+            value={productUpdate?.product_description}
             placeholder="Enter description"
             className="px-2 py-2 rounded-md border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500 min-h-[160px]"
             onChange={(e) => {
-              setProduct({ ...product, product_description: e.target.value });
+              setProductUpdate({
+                ...productUpdate,
+                product_description: e.target.value,
+              });
             }}
           />
           <span className="mt-2">
@@ -148,20 +184,28 @@ const CreateProductForm = () => {
               </div>
             </div>
             <div className="flex ml-4 overflow-x-hidden flex-wrap">
-              {imgUrls.map((url) => (
-                <div className="h-24 w-28 mr-2 mb-1 relative" key={url}>
-                  <img className="w-full h-full" src={url} alt="product" />
-                  <span
-                    className="absolute -top-2 right-0 p-1 cursor-pointer"
-                    onClick={() => {
-                      setImgUrls((prev) => prev.filter((item) => item !== url));
-                      setProduct((prev) => ({ ...prev, img_urls: imgUrls }));
-                    }}
-                  >
-                    x
-                  </span>
-                </div>
-              ))}
+              {imgUrls &&
+                imgUrls.map((url) => (
+                  <div className="h-24 w-28 mr-2 mb-1 relative" key={url}>
+                    <img className="w-full h-full" src={url} alt="product" />
+                    <span
+                      className="absolute -top-2 right-0 p-1 cursor-pointer"
+                      onClick={() => {
+                        setImgUrls((prev) =>
+                          prev.filter((item) => item !== url)
+                        );
+                        setProductUpdate((prev) => ({
+                          ...prev,
+                          img_urls: prev.img_urls.filter(
+                            (item) => item !== url
+                          ),
+                        }));
+                      }}
+                    >
+                      x
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -170,41 +214,50 @@ const CreateProductForm = () => {
           <label className="text-xl font-medium mb-2">Add size</label>
           <Select
             options={ProductService.convertSizesToSelectElementData(sizes)}
+            value={ProductService.convertSizesToSelectElementData(selectSize)}
             isMulti
             onChange={(e) => {
               const sizeIds = e.map((size) => size.value);
-              setProduct({ ...product, size_id: sizeIds });
+              setProductUpdate({ ...productUpdate, size_id: sizeIds });
             }}
           />
         </div>
 
         <div className="absolute bottom-0">
           <button
-            className=" px-4 py-2 bg-blue-900 text-white rounded-md font-medium hover:bg-blue-600"
+            className=" px-4 py-2 bg-blue-900 text-white rounded-md font-medium hover:bg-blue-600 mr-4"
             onClick={async () => {
               try {
-                setIsLoading(true);
-                const newProduct = await ProductApi.createProduct(product);
-                setIsLoading(false);
-                navigate("/admin");
+                setIsUploading(true);
+                await ProductApi.updateProduct(productUpdate);
+                setIsUploading(false);
+                navigate("/admin/");
               } catch (error) {
-                setIsLoading(false);
+                setIsUploading(false);
                 console.log(error);
               }
             }}
           >
-            Add Product
+            Update Product
+          </button>
+          <button
+            className=" px-4 py-2 text-white rounded-md font-medium bg-gray-500 hover:bg-gray-700"
+            onClick={() => {
+              navigate("/admin");
+            }}
+          >
+            Hủy
           </button>
         </div>
       </div>
-      {isLoading && (
+      {isUploading && (
         <div className="w-screen h-screen top-0 fixed left-0 bg-black opacity-70 flex flex-col justify-center items-center">
           <Loading />
-          <span className="text-xl text-white">Creating...</span>
+          <span className="text-xl text-white">Updating...</span>
         </div>
       )}
     </div>
   );
 };
 
-export default CreateProductForm;
+export default UpdateProductForm;
