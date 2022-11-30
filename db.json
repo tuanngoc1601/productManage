@@ -2,59 +2,59 @@
   "categories": [
     {
       "id": 1,
-      "name": "Áo khóa"
+      "category_name": "Áo khóa"
     },
     {
       "id": 2,
-      "name": "Công sở"
+      "category_name": "Công sở"
     },
     {
       "id": 3,
-      "name": "Thể thao"
+      "category_name": "Thể thao"
     },
     {
       "id": 4,
-      "name": "Bikini"
+      "category_name": "Bikini"
     },
     {
       "id": 5,
-      "name": "Váy"
+      "category_name": "Váy"
     },
     {
       "id": 6,
-      "name": "Quần"
+      "category_name": "Quần"
     }
   ],
   "colors": [
     {
       "id": 1,
-      "name": "Red",
-      "code": "#FF0000"
+      "color_name": "Red",
+      "color_code": "#FF0000"
     },
     {
       "id": 2,
-      "name": "Blue",
-      "code": "#0000FF"
+      "color_name": "Blue",
+      "color_code": "#0000FF"
     },
     {
       "id": 3,
-      "name": "Green",
-      "code": "#00FF00"
+      "color_name": "Green",
+      "color_code": "#00FF00"
     },
     {
       "id": 4,
-      "name": "Yellow",
-      "code": "#FFFF00"
+      "color_name": "Yellow",
+      "color_code": "#FFFF00"
     },
     {
       "id": 5,
-      "name": "Black",
-      "code": "#000000"
+      "color_name": "Black",
+      "color_code": "#000000"
     },
     {
       "id": 6,
-      "name": "White",
-      "code": "#FFFFFF"
+      "color_name": "White",
+      "color_code": "#FFFFFF"
     }
   ],
   "products": [
@@ -102,7 +102,7 @@
       "category_id": 6
     },
     {
-      "id": "5",
+      "id": 5,
       "product_name": "Quần Âu",
       "product_description": "No",
       "colors": [
@@ -126,8 +126,8 @@
       "category_id": 6
     },
     {
-      "id": "6",
-      "product_name": "",
+      "id": 6,
+      "product_name": "Bikini",
       "product_description": "No",
       "colors": [
         1,
@@ -150,7 +150,8 @@
       "category_id": 6
     },
     {
-      "product_name": "",
+      "id": 7,
+      "product_name": "Bamboo",
       "product_description": "No",
       "colors": [
         1,
@@ -170,12 +171,11 @@
         "https://image/image2.png",
         "https://image/image3.png"
       ],
-      "category_id": 5,
-      "id": "7"
+      "category_id": 5
     },
     {
-      "id": "8",
-      "product_name": "",
+      "id": 8,
+      "product_name": "Áo khoác gió",
       "product_description": "No",
       "colors": [
         1,
@@ -196,6 +196,32 @@
         "https://image/image3.png"
       ],
       "category_id": 1
+    }
+  ],
+  "size": [
+    {
+      "id": 1,
+      "name": "S"
+    },
+    {
+      "id": 2,
+      "name": "M"
+    },
+    {
+      "id": 3,
+      "name": "L"
+    },
+    {
+      "id": 4,
+      "name": "XL"
+    },
+    {
+      "id": 5,
+      "name": "2XL"
+    },
+    {
+      "id": 6,
+      "name": "3Xl"
     }
   ]
 }
