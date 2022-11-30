@@ -27,7 +27,12 @@ function App() {
             />
           }
         />
-        <Route path="/products/:id" element={<SingleProduct />} />
+        {/* <Route path="/products/:id" element={<SingleProduct />} />
+        <Route path="/admin/create-product" element={<CreateProductForm />} /> */}
+        <Route
+          path="/products/:id"
+          element={<SingleProduct colors={colors} sizes={sizes} />}
+        />
 
         <Route
           path="/admin/update-product/:productId"
