@@ -14,7 +14,7 @@
   margin: 0 auto;
   max-width: var(--fullWidth);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  grid-template-columns: repeat(auto-fit, 31%);
   row-gap: 2rem;
   column-gap: 2rem;
   /* align-items: start; */
