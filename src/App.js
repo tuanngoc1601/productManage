@@ -10,7 +10,7 @@ import CreateProductForm from "./page/Admin/CreateProductForm";
 import UpdateProductForm from "./page/Admin/UpdateProductForm";
 import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
 function App() {
-  const { products, sizes, colors, categories } = useGetAllProductInfo();
+  const { colors, sizes, categories, products } = useGetAllProductInfo();
 
   return (
     <>
@@ -18,7 +18,16 @@ function App() {
       <Routes>
         <Route path="/" element={<User />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/create-product" element={<CreateProductForm />} />
+        <Route
+          path="/admin/create-product"
+          element={
+            <CreateProductForm
+              sizes={sizes}
+              colors={colors}
+              categories={categories}
+            />
+          }
+        />
         <Route path="/products/:id" element={<SingleProduct />} />
 
         <Route
@@ -33,17 +42,6 @@ function App() {
       </Routes>
     </>
   );
-  // return (
-  //   <>
-  //     <Navbar />
-  //     <Routes>
-  //       <Route path="/" element={<User />} />
-  //       <Route path="/admin" element={<Admin />} />
-  //       <Route path="/about" element={<About />} />
-  //       <Route path="/error" element={<Error />} />
-  //     </Routes>
-  //   </>
-  // );
 }
 
 export default App;

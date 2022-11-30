@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import ReactPaginate from "react-paginate";
 import { useState, useEffect } from "react";
-const ITEM_PER_PAGE = 10;
+const ITEM_PER_PAGE = 6;
 const ColorItem = ({ color }) => {
   return (
     <div className="rounded-full border-2 border-slate-300 mr-1">
@@ -25,6 +25,7 @@ const ProductTable = ({
   const pageCount = Math.ceil(products.length / ITEM_PER_PAGE);
   const [productsPaginate, setProductsPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     setProductsPaginate(products.slice(0, ITEM_PER_PAGE));
   }, [products]);
@@ -110,8 +111,11 @@ const ProductTable = ({
                 </td>
                 <td className="border border-slate-300 px-3 py-[6px] ">
                   <div className="flex flex-nowrap">
-                    <button className="px-2 py-1 rounded-sm bg-blue-300 hover:bg-blue-500 hover:text-white mr-2 font-semibold">
-                      <Link to={`/admin/update-product/${product.product_id}`}>
+                    <button className="px-2 py-1 rounded-sm bg-blue-300 hover:bg-blue-500 hover:text-white mr-2 font-semibold ">
+                      <Link
+                        to={`/admin/update-product/${product.product_id}`}
+                        className="no-underline"
+                      >
                         Update
                       </Link>
                     </button>
@@ -136,18 +140,21 @@ const ProductTable = ({
         <ReactPaginate
           className="flex p-1 rounded-xl bg-primary-10 mt-8 shadow-md"
           breakLabel="..."
-          previousLabel={<div>Previous</div>}
-          nextLabel={<div>Next</div>}
+          previousLabel={<div className=" no-underline">Previous</div>}
+          nextLabel={<div className=" no-underline">Next</div>}
           pageCount={pageCount}
           onPageChange={({ selected }) => {
             setCurrentPage(selected + 1);
             setProductsPaginate(
-              products.slice(selected * 10, (selected + 1) * 10)
+              products.slice(
+                selected * ITEM_PER_PAGE,
+                (selected + 1) * ITEM_PER_PAGE
+              )
             );
           }}
           pageClassName="px-4 py-2 mx-1 rounded-md flex items-center"
           activeClassName="bg-blue-200 "
-          previousClassName={`flex items-center px-2`}
+          previousClassName={`flex items-center px-2 `}
           nextClassName={`flex items-center px-2 `}
           disabledClassName={"text-primary-20"}
         />

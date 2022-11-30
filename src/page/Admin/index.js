@@ -11,18 +11,20 @@ import {
   CategoriesList,
 } from "../../recoil/Products";
 const Admin = () => {
+  useGetAllProductInfo();
   const products = useRecoilValue(ProductsList);
   const sizes = useRecoilValue(SizesList);
   const colors = useRecoilValue(ColorsList);
   const categories = useRecoilValue(CategoriesList);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
+
   return (
     <div className="mt-12 px-44 w-full mb-12">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-red-500 text-xl font-bold">Manage products</h1>
         <button className="px-3 py-2 rounded-md bg-blue-500  font-semibold hover:bg-blue-600">
-          <Link to="/admin/create-product" className="text-white">
+          <Link to="/admin/create-product" className="text-white  no-underline">
             Create product
           </Link>
         </button>

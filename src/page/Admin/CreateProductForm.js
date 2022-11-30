@@ -1,5 +1,4 @@
 import Select from "react-select";
-import useGetAllProductInfo from "../../hooks/useGetAllProductInfo";
 import { useState } from "react";
 import { storage } from "../../firebase.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -7,9 +6,11 @@ import ProductApi from "../../api/ProductApi";
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import ProductService from "../../services/ProductService";
-const CreateProductForm = () => {
+import ValidateProductForm from "../../services/ValidateProductForm.js";
+import { RiErrorWarningLine } from "react-icons/ri";
+
+const CreateProductForm = ({ categories, colors, sizes }) => {
   const navigate = useNavigate();
-  const { categories, colors, sizes } = useGetAllProductInfo();
   const [imgUrls, setImgUrls] = useState([]);
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +29,7 @@ const CreateProductForm = () => {
             setImgUrls((prev) => [...prev, url]);
             setProduct((prev) => ({
               ...prev,
-              img_urls: [...prev.img_urls, url],
+              img_urls: prev.img_urls ? [...prev.img_urls, url] : [url],
             }));
           });
         }
@@ -37,26 +38,49 @@ const CreateProductForm = () => {
       console.log("Error uploading file: ", error);
     }
   };
+
+  const handleCreateproduct = async () => {
+    try {
+      setIsLoading(true);
+      const checkValidate = ValidateProductForm.validateProduct(product);
+      if (checkValidate) {
+        const newProduct = await ProductApi.createProduct(product);
+        setIsLoading(false);
+        navigate("/admin");
+      } else {
+        alert("Please fill all fields");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
   return (
     <div className="mt-12 px-44 w-full flex relative">
       <div className="w-1/2 pr-20">
         <div className="flex flex-col mb-4">
-          <label className="text-xl font-medium mb-2">Product name</label>
+          <label className="text-xl font-medium mb-2 flex items-center">
+            Product name
+            <RiErrorWarningLine className="ml-2" />
+          </label>
           <input
             required
             placeholder="Enter product name"
-            className="px-2 py-2 rounded-md border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500"
+            className="px-2 py-2 rounded-md border-2 border-gray-300 focus:outline-none focus:border-2 focus:border-blue-500"
             onChange={(e) =>
               setProduct({ ...product, product_name: e.target.value })
             }
           />
-          <span className="mt-2">
+          <span className="mt-2 text-sm text-yellow-300">
             Do not execeed 20 characters when entering the product name
           </span>
         </div>
 
         <div className="flex flex-col  mb-4">
-          <label className=" text-xl font-medium mb-2">Category</label>
+          <label className=" text-xl font-medium mb-2 flex items-center">
+            Category <RiErrorWarningLine className="ml-2" />
+          </label>
           <Select
             options={ProductService.convertCategoriesToSelectElementData(
               categories
@@ -66,7 +90,9 @@ const CreateProductForm = () => {
         </div>
 
         <div className="flex flex-col  mb-4">
-          <label className="text-xl font-medium mb-2">Add color</label>
+          <label className="text-xl font-medium mb-2 flex items-center">
+            Add color <RiErrorWarningLine className="ml-2" />
+          </label>
           <Select
             options={ProductService.convertColorsToSelectElementData(colors)}
             isMulti
@@ -97,12 +123,12 @@ const CreateProductForm = () => {
           <label className="text-xl font-medium mb-2">Description</label>
           <textarea
             placeholder="Enter description"
-            className="px-2 py-2 rounded-md border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500 min-h-[160px]"
+            className="px-2 py-2 rounded-md border-2 border-gray-300 focus:outline-none focus:border-2 focus:border-blue-500 min-h-[160px]"
             onChange={(e) => {
               setProduct({ ...product, product_description: e.target.value });
             }}
           />
-          <span className="mt-2">
+          <span className="mt-2 text-sm text-yellow-300">
             Do not execeed 100 characters when entering the product description
           </span>
         </div>
@@ -110,7 +136,9 @@ const CreateProductForm = () => {
 
       <div className="relative w-1/2">
         <div className="mb-20 w-full">
-          <label className="text-xl font-medium mb-2">Product image</label>
+          <label className="text-xl font-medium mb-2 flex items-center">
+            Product image <RiErrorWarningLine className="ml-2" />
+          </label>
           <div className="flex items-center">
             <div className="max-w-[200px] rounded-lg shadow-xl bg-gray-50 pb-2">
               <div className="m-4">
@@ -155,7 +183,10 @@ const CreateProductForm = () => {
                     className="absolute -top-2 right-0 p-1 cursor-pointer"
                     onClick={() => {
                       setImgUrls((prev) => prev.filter((item) => item !== url));
-                      setProduct((prev) => ({ ...prev, img_urls: imgUrls }));
+                      setProduct((prev) => ({
+                        ...prev,
+                        img_urls: prev.img_urls.filter((item) => item !== url),
+                      }));
                     }}
                   >
                     x
@@ -167,7 +198,9 @@ const CreateProductForm = () => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-xl font-medium mb-2">Add size</label>
+          <label className="text-xl font-medium mb-2 flex items-center">
+            Add size <RiErrorWarningLine className="ml-2" />
+          </label>
           <Select
             options={ProductService.convertSizesToSelectElementData(sizes)}
             isMulti
@@ -180,20 +213,18 @@ const CreateProductForm = () => {
 
         <div className="absolute bottom-0">
           <button
-            className=" px-4 py-2 bg-blue-900 text-white rounded-md font-medium hover:bg-blue-600"
-            onClick={async () => {
-              try {
-                setIsLoading(true);
-                const newProduct = await ProductApi.createProduct(product);
-                setIsLoading(false);
-                navigate("/admin");
-              } catch (error) {
-                setIsLoading(false);
-                console.log(error);
-              }
-            }}
+            className=" px-4 py-2 bg-blue-900 text-white rounded-md font-medium hover:bg-blue-600 mr-4"
+            onClick={handleCreateproduct}
           >
             Add Product
+          </button>
+          <button
+            className=" px-4 py-2 text-white rounded-md font-medium bg-gray-500 hover:bg-gray-700"
+            onClick={() => {
+              navigate("/admin");
+            }}
+          >
+            Cancel
           </button>
         </div>
       </div>
