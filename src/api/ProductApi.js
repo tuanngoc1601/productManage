@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import { axiosClient, axiosSubClient } from "./axiosClient";
 class ProductApi {
   static getAllProducts = async () => {
     const url = "/products";
@@ -33,6 +33,11 @@ class ProductApi {
   static deleteProduct = async (id) => {
     const url = `/products/${id}`;
     return await axiosClient.delete(url);
+  };
+
+  static getAllPrice = async () => {
+    const url = "/price";
+    return await axiosSubClient.get(url);
   };
 }
 
