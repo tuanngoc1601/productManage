@@ -5,6 +5,7 @@ import User from "./page/User";
 import Admin from "./page/Admin";
 import Error from "./page/Error";
 import About from "./page/About";
+import SingleProduct from "./page/SingleProduct";
 // import component
 import Navbar from "./components/Navbar";
 import CreateProductForm from "./page/Admin/CreateProductForm";
@@ -20,6 +21,8 @@ function App() {
         <Route path="/" element={<User />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/create-product" element={<CreateProductForm />} />
+        <Route path="/products/:id" element={<SingleProduct />} />
+
         <Route
           path="/admin/update-product/:productId"
           element={<UpdateProductForm />}
@@ -32,6 +35,17 @@ function App() {
       </Routes>
     </>
   );
+  // return (
+  //   <>
+  //     <Navbar />
+  //     <Routes>
+  //       <Route path="/" element={<User />} />
+  //       <Route path="/admin" element={<Admin />} />
+  //       <Route path="/about" element={<About />} />
+  //       <Route path="/error" element={<Error />} />
+  //     </Routes>
+  //   </>
+  // );
 }
 
 export default App;

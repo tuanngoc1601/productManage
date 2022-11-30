@@ -12,17 +12,17 @@ const Navbar = () => {
                 </Link>
                 <ul className={Styles.nav_links}>
                     <li>
-                        <Link to="/">
+                        <Link style={{ textDecoration: 'none', color: '#000' }} to="/">
                             User
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin">
+                        <Link style={{ textDecoration: 'none', color: '#000' }} to="/admin">
                             Admin
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about">
+                        <Link style={{ textDecoration: 'none', color: '#000' }} to="/about">
                             About
                         </Link>
                     </li>
