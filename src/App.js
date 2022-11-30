@@ -1,12 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-// import pages
 import User from "./page/User";
 import Admin from "./page/Admin";
 import Error from "./page/Error";
 import About from "./page/About";
 import SingleProduct from "./page/SingleProduct";
-// import component
 import Navbar from "./components/Navbar";
 import CreateProductForm from "./page/Admin/CreateProductForm";
 import UpdateProductForm from "./page/Admin/UpdateProductForm";
