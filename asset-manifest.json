@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/product-manage-frontend/static/css/main.84647d77.css",
+    "main.js": "/product-manage-frontend/static/js/main.a7588126.js",
+    "static/media/logo.svg": "/product-manage-frontend/static/media/logo.f43a2245f2e27c8b1b645f22293ac86d.svg",
+    "index.html": "/product-manage-frontend/index.html",
+    "main.84647d77.css.map": "/product-manage-frontend/static/css/main.84647d77.css.map",
+    "main.a7588126.js.map": "/product-manage-frontend/static/js/main.a7588126.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.84647d77.css",
+    "static/js/main.a7588126.js"
+  ]
+}
