@@ -11,7 +11,7 @@ const Product = ({ id, name, images, info, category_id }) => {
       <div className={Styles.product_footer}>
         <p>{name}</p>
         <p>{info}</p>
-        <Link to={`/products/${id}`} className="btn btn-primary btn-details">
+        <Link to={`/user/products/${id}`} className="btn btn-primary btn-details">
           details
         </Link>
       </div>
