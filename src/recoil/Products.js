@@ -5,6 +5,11 @@ export const ProductsList = atom({
   default: [],
 });
 
+export const UserProductsList = atom({
+  key: "USER_PRODUCTS_LIST",
+  default: [],
+});
+
 export const ColorsList = atom({
   key: "COLORS_LIST",
   default: [],

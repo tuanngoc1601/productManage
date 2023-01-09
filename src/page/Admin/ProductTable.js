@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import ProductService from "../../services/ProductService";
-import ReactPaginate from "react-paginate";
-import { useState, useEffect } from "react";
 const ITEM_PER_PAGE = 8;
 const ColorItem = ({ color }) => {
   return (
@@ -28,9 +28,10 @@ const ProductTable = ({
   const [productsPaginate, setProductsPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    if (searchCondition.category && searchCondition.category != 0) {
+    if (searchCondition.category && parseInt(searchCondition.category) !== 0) {
       const search = products.filter(
-        (product) => product.category_id == searchCondition.category
+        (product) =>
+          product.category_id.toString() === searchCondition.category.toString()
       );
       setSearchProduct(search);
     } else {
@@ -57,6 +58,9 @@ const ProductTable = ({
             <th className="border-t border-l border-r border-slate-300 px-4 py-2">
               Price (VNĐ)
             </th>
+            <th className="border-t border-l border-r border-slate-300 px-4 py-2">
+              Sale off (%)
+            </th>
             <th className="border-t border-l border-r border-slate-300 px-2 py-2 min-w-[160px]">
               <select
                 className="bg-transparent focus:outline-none"
@@ -68,11 +72,11 @@ const ProductTable = ({
                 {categories.map((category) => {
                   return (
                     <option
-                      key={category.category_id}
-                      value={category.category_id}
+                      key={category.id}
+                      value={category.id}
                       className="text-gray-800 cursor-pointer"
                     >
-                      {category.category_name}
+                      {category.name}
                     </option>
                   );
                 })}
@@ -93,80 +97,91 @@ const ProductTable = ({
           </tr>
         </thead>
         <tbody>
-          {productsPaginate.map((product, index) => {
-            return (
-              <tr key={product.product_id}>
-                <td className="border border-slate-300 px-3 py-[6px]">
-                  {(currentPage - 1) * ITEM_PER_PAGE + index + 1}
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px] ">
-                  <p className="h-full">{product.product_name}</p>
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px]">
-                  {product.price || "Chưa cập nhật"}
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px]">
-                  {
-                    ProductService.getCatgoryById(
-                      product.category_id,
-                      categories
-                    )?.category_name
-                  }
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px]">
-                  <div className="flex justify-center">
-                    {ProductService.getColorByIds(product.color_id, colors).map(
-                      (item, index) => {
-                        return (
-                          <ColorItem color={item?.color_code} key={index} />
-                        );
-                      }
-                    )}
-                  </div>
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px] font-bold">
-                  {ProductService.getSizeByIds(product.size_id, sizes).map(
-                    (item, index) => {
-                      return (
-                        <span
-                          key={index}
-                          className="px-2 py-1 mr-2 rounded-md  bg-slate-400"
-                        >
-                          {item?.size_name}
-                        </span>
-                      );
+          {productsPaginate.length > 0 ? (
+            productsPaginate.map((product, index) => {
+              return (
+                <tr key={product.id}>
+                  <td className="border border-slate-300 px-3 py-[6px]">
+                    {(currentPage - 1) * ITEM_PER_PAGE + index + 1}
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-1/5">
+                    <p className="h-full text-center font-bold">
+                      {product.name}
+                    </p>
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-[120px]">
+                    {product.cost || "No update"}
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-[160px]">
+                    {product.sale_off ? product.sale_off + "%" : ""}
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-[80px]">
+                    {
+                      ProductService.getCatgoryById(
+                        product.category_id,
+                        categories
+                      )?.name
                     }
-                  )}
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px] ">
-                  <p className="text-overflow_3 ">
-                    {product.product_description}
-                  </p>
-                </td>
-                <td className="border border-slate-300 px-3 py-[6px] ">
-                  <div className="flex flex-nowrap">
-                    <button className="px-2 py-1 rounded-sm bg-blue-300 hover:bg-blue-500 hover:text-white mr-2 font-semibold ">
-                      <Link
-                        to={`/admin/update-product/${product.product_id}`}
-                        className="no-underline"
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-[120px]">
+                    <div className="flex justify-center w-full flex-wrap">
+                      {ProductService.getColorsByProductId(product, colors).map(
+                        (item, index) => {
+                          return <ColorItem color={item} key={index} />;
+                        }
+                      )}
+                    </div>
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] font-bold w-[320px]">
+                    <div className="flex w-full justify-center flex-wrap">
+                      {ProductService.getSizesByProductId(product, sizes).map(
+                        (item, index) => {
+                          return (
+                            <span
+                              key={index}
+                              className="px-2 py-1 mr-2 rounded-md  bg-slate-400 mb-1"
+                            >
+                              {item}
+                            </span>
+                          );
+                        }
+                      )}
+                    </div>
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] w-1/5">
+                    <p className="text-overflow_3 ">{product.description}</p>
+                  </td>
+                  <td className="border border-slate-300 px-3 py-[6px] ">
+                    <div className="flex flex-nowrap">
+                      <button className="px-2 py-1 rounded-sm bg-blue-300 hover:bg-blue-500 hover:text-white mr-2 font-semibold ">
+                        <Link
+                          to={`/admin/update-product/${product.id}`}
+                          className="no-underline"
+                        >
+                          Update
+                        </Link>
+                      </button>
+                      <button
+                        className="px-2 py-1 rounded-sm bg-red-500 text-white font-semibold hover:bg-red-700"
+                        onClick={() => {
+                          setIsOpenDeleteModal(true);
+                          setDeleteItem(product.id);
+                        }}
                       >
-                        Update
-                      </Link>
-                    </button>
-                    <button
-                      className="px-2 py-1 rounded-sm bg-red-500 text-white font-semibold hover:bg-red-700"
-                      onClick={() => {
-                        setIsOpenDeleteModal(true);
-                        setDeleteItem(product.product_id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan="9" className="text-center py-4 border-2">
+                Không có sản phẩm nào
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
 

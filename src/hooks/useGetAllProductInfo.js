@@ -1,17 +1,19 @@
-import ProductApi from "../api/ProductApi";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import ProductApi from "../api/ProductApi";
 import {
-  ProductsList,
-  ColorsList,
-  SizesList,
   CategoriesList,
+  ColorsList,
+  ProductsList,
+  SizesList,
+  UserProductsList,
 } from "../recoil/Products";
 const useGetAllProductInfo = () => {
   const [categories, setCateogries] = useRecoilState(CategoriesList);
   const [colors, setColors] = useRecoilState(ColorsList);
   const [sizes, setSizes] = useRecoilState(SizesList);
   const [products, setProducts] = useRecoilState(ProductsList);
+  const [userProducts, setUserProducts] = useRecoilState(UserProductsList);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -19,24 +21,19 @@ const useGetAllProductInfo = () => {
         const { data: colors } = await ProductApi.getAllColors();
         const { data: sizes } = await ProductApi.getAllSizes();
         const { data: products } = await ProductApi.getAllProducts();
-        const { data: prices } = await ProductApi.getAllPrice();
-        const newProducts = products.map((product) => {
-          const price = prices.find(
-            (price) => price.Product_id == product.product_id
-          );
-          return { ...product, price: price?.price };
-        });
+        const { data: userProducts } = await ProductApi.getAllUserProducts();
         setCateogries(categories);
         setColors(colors);
         setSizes(sizes);
-        setProducts(newProducts);
+        setProducts(products);
+        setUserProducts(userProducts);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
   }, []);
-  return { categories, colors, sizes, products };
+  return { categories, colors, sizes, products, userProducts };
 };
 
 export default useGetAllProductInfo;

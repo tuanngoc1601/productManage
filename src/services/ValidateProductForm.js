@@ -13,41 +13,18 @@ class ValidateProductForm {
     return true;
   }
 
-  static validateColors(colors) {
-    if (colors && colors.length > 0) {
+  static validateSubProduct(subProduct) {
+    if (subProduct && Object.keys(subProduct).length > 0) {
       return true;
     }
     return false;
   }
 
-  static validateSizes(sizes) {
-    if (sizes && sizes.length > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  static validateImgs(imgs) {
-    if (imgs && imgs.length > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  static validateProduct({
-    product_name,
-    category_id,
-    color_id,
-    size_id,
-    img_urls,
-  }) {
-    // console.log({ product_name, category_id, color_id, size_id, img_urls });
+  static validateProduct({ name, category_id, sub_products }) {
     if (
-      this.validateName(product_name) &&
+      this.validateName(name) &&
       this.validateCategory(category_id) &&
-      this.validateColors(color_id) &&
-      this.validateSizes(size_id) &&
-      this.validateImgs(img_urls)
+      this.validateSubProduct(sub_products)
     ) {
       return true;
     }

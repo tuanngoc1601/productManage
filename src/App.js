@@ -2,21 +2,17 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
-import About from "./page/About";
 import Admin from "./page/Admin";
 import CreateProductForm from "./page/Admin/CreateProductForm";
 import UpdateProductForm from "./page/Admin/UpdateProductForm";
 import Error from "./page/Error";
-import SingleProduct from "./page/SingleProduct";
-import User from "./page/User";
 
 function App() {
-  const { colors, sizes, categories } = useGetAllProductInfo();
+  const { colors, sizes, categories, userProducts } = useGetAllProductInfo();
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/user" element={<User />} />
         <Route path="/admin" element={<Admin />} />
         <Route
           path="/admin/create-product"
@@ -30,13 +26,13 @@ function App() {
         />
         <Route
           path="/admin/update-product/:productId"
-          element={<UpdateProductForm />}
+          element={
+            <UpdateProductForm
+              userProducts={userProducts}
+              categories={categories}
+            />
+          }
         />
-        <Route
-          path="/user/products/:id"
-          element={<SingleProduct colors={colors} sizes={sizes} />}
-        />
-        <Route path="/about" element={<About />} />
         <Route path="/error" element={<Error />} />
       </Routes>
     </>

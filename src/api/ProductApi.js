@@ -1,7 +1,12 @@
-import { axiosClient, axiosSubClient } from "./axiosClient";
+import { axiosClient } from "./axiosClient";
 class ProductApi {
   static getAllProducts = async () => {
     const url = "/products";
+    return await axiosClient.get(url);
+  };
+
+  static getAllUserProducts = async () => {
+    const url = "/user/products";
     return await axiosClient.get(url);
   };
   static getProductById = async (id) => {
@@ -13,7 +18,7 @@ class ProductApi {
     return await axiosClient.get(url);
   };
   static getAllSizes = async () => {
-    const url = "/size";
+    const url = "/sizes";
     return await axiosClient.get(url);
   };
   static getAllCategories = async () => {
@@ -25,9 +30,9 @@ class ProductApi {
     return await axiosClient.post(url, data);
   };
 
-  static updateProduct = async (data) => {
-    const url = `/products/${data.product_id}`;
-    return await axiosClient.put(url, data);
+  static updateProduct = async (data, id) => {
+    const url = `/products/${id}`;
+    return await axiosClient.post(url, data);
   };
 
   static deleteProduct = async (id) => {
@@ -37,7 +42,7 @@ class ProductApi {
 
   static getAllPrice = async () => {
     const url = "/price";
-    return await axiosSubClient.get(url);
+    return await axiosClient.get(url);
   };
 }
 

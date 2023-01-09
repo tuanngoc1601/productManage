@@ -1,41 +1,60 @@
+import { unique } from "../utils";
+
 class ProductService {
   static getColorById(colorId, colors) {
-    const colorCode = colors.find((color) => color.color_id == colorId);
+    const colorCode = colors.find(
+      (color) => color.id.toString() === colorId.toString()
+    );
     return colorCode;
   }
 
-  static getColorByIds(colorIds, colors) {
-    if (!colorIds) {
-      return [];
+  static getColorNameById(colorId, colors) {
+    const color = colors.find(
+      (color) => color.id.toString() === colorId.toString()
+    );
+    return color.name;
+  }
+
+  static getSizeNameById(sizeId, sizes) {
+    const size = sizes.find((size) => size.id.toString() === sizeId.toString());
+    return size.name;
+  }
+
+  static getColorsByProductId(product, colors) {
+    if (product.sub_products.length > 0) {
+      const listColors = product.sub_products.map((subProduct) => {
+        const color = this.getColorById(subProduct.color_id, colors);
+        return color.code;
+      });
+      return unique(listColors);
     }
-    const data = colorIds.map((colorId) => {
-      const colorCode = this.getColorById(colorId, colors);
-      return colorCode;
-    });
-    return data;
+    return [];
   }
 
   static getCatgoryById(categoryId, categories) {
+    if (!categoryId) {
+      return null;
+    }
     const categoryName = categories.find(
-      (category) => category.category_id == categoryId
+      (category) => category.id.toString() === categoryId.toString()
     );
     return categoryName;
   }
 
   static getSizeById(sizeId, sizes) {
-    const size = sizes.find((size) => size.size_id == sizeId);
+    const size = sizes.find((size) => size.id.toString() === sizeId.toString());
     return size;
   }
 
-  static getSizeByIds(sizeIds, sizes) {
-    if (!sizeIds) {
-      return [];
+  static getSizesByProductId(product, sizes) {
+    if (product.sub_products.length > 0) {
+      const listSizes = product.sub_products.map((subProduct) => {
+        const size = this.getColorById(subProduct.size_id, sizes);
+        return size.name;
+      });
+      return unique(listSizes);
     }
-    const data = sizeIds.map((sizeId) => {
-      const size = this.getSizeById(sizeId, sizes);
-      return size;
-    });
-    return data;
+    return [];
   }
 
   static convertColorsToSelectElementData(colors) {
@@ -43,7 +62,7 @@ class ProductService {
       return [];
     }
     return colors.map((color) => {
-      return { value: color.color_id, label: color.color_code };
+      return { value: color.id, label: color.name, color: color.code };
     });
   }
 
@@ -52,7 +71,7 @@ class ProductService {
       return [];
     }
     return sizes.map((size) => {
-      return { value: size.size_id, label: size.size_name };
+      return { value: size.id, label: size.name };
     });
   }
 
@@ -61,7 +80,7 @@ class ProductService {
       return;
     }
     return categories.map((category) => {
-      return { value: category.category_id, label: category.category_name };
+      return { value: category.id, label: category.name };
     });
   }
 }

@@ -1,16 +1,16 @@
-// Import the functions you need from the SDKs you need
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 const firebaseConfig = {
-  apiKey: "AIzaSyAZk4y8b79_kfumt65FCM3vzr55VwBz2mA",
-  authDomain: "app-vote-images-6d327.firebaseapp.com",
-  projectId: "app-vote-images-6d327",
-  storageBucket: "app-vote-images-6d327.appspot.com",
-  messagingSenderId: "1081109300592",
-  appId: "1:1081109300592:web:3efdb7cbc84dd48d5a3bb5",
-  measurementId: "G-WQX6E5CDTD",
+  apiKey: "AIzaSyDNlYdtCC23hWV4tt5TWFzxZf1zJurWWtE",
+  authDomain: "product-p01.firebaseapp.com",
+  projectId: "product-p01",
+  storageBucket: "product-p01.appspot.com",
+  messagingSenderId: "193098622059",
+  appId: "1:193098622059:web:d6421f9363ab3dffddfd2e",
+  measurementId: "G-944G18ZKC2",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
+const analytics = getAnalytics(app);
