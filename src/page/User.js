@@ -1,12 +1,12 @@
 import React from 'react';
-import SearchForm from '../components/SearchForm';
-import ProductList from '../components/ProductList';
+import HeadPage from '../components/HeadPage';
+import ProductPage from '../components/ProductPage';
 
 const User = () => {
     return (
-        <main>
-            <SearchForm />
-            <ProductList />
+        <main style={{ width: '95%', margin: 'auto auto' }}>
+            <HeadPage />
+            <ProductPage />
         </main>
     )
 }

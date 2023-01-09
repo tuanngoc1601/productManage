@@ -4,8 +4,8 @@
     height: 5rem;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid var(--primaryColor);
-    box-shadow: var(--lightShadow);
+    /* border-bottom: 2px solid var(--primaryColor); */
+    /* box-shadow: var(--lightShadow); */
 }
 .nav_center {
     display: flex;

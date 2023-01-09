@@ -1,0 +1,59 @@
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 28px;
+}
+
+.icon_filter {
+    width: 32px;
+    height: 22px;
+    margin-left: 10px;
+}
+
+.sub_filter {
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 10px;
+}
+
+.filter_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.filter_name {
+    font-size: 14px;
+    font-weight: 700;
+}
+.filter_icon {
+    width: 20px;
+    font-size: 22px;
+}
+
+.form_group_checkbox {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+.input_checkbox {
+    width: 18px;
+    border: 1px solid #9b9b9b;
+    border-radius: '5px';
+}
+.input_label {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: '400';
+    margin-left: 15px;
+}
+.color_filer {
+    height: 14px;
+    width: 14px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.form_group_checkbox:hover .input_label {
+    text-decoration: under;
+}

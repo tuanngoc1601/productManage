@@ -1,0 +1,322 @@
+[
+    {
+      "id": 2,
+      "name": "ÁO THUN NAM TAY NGẮN TRƠN FORM FITTED - 10S21TSH019CR2",
+      "description": "Áo thun tay ngắn là một trong những item cơ bản không còn xa lạ thời trang thường ngày. Những chiếc áo thun t-shirt đầu tiên được ra đời vào những thập kỷ đầu của thế kỷ XX được dùng để làm áo lót của những người lính trong quân đội. Cột mốc quan trọng trở thành item “quốc dân” đó là khi các diễn viên Hollywood đưa áo thun trắng lên màn ảnh. Từ đó, áo thun trở thành món đồ thời trang sử dụng phổ biến đến ngày nay.<br />Áo thun tay ngắn là một trong những item cơ bản phổ biến trong thời trang thường ngày. Với tổng thể đơn giản, thoải mái và tính ứng dụng cao, áo thun luôn là lựa chọn ưu tiên nhiều người. Áo thun tay ngắn. FITTED - 10S21TSH019CR2 là item basic chinh phục người mặc bởi chất vải mềm mại, thoáng mát rất phù hợp với mùa hè.",
+      "cost": 120000,
+      "status": null,
+      "category_id": 1,
+      "supplier_id": null,
+      "created_at": null,
+      "updated_at": null,
+      "sale_off": 34,
+      "sale_price": 149000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 5,
+          "size": "XL",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 6,
+          "size": "XS",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "QUẦN DÀI KAKI NAM DOBBY FORM SLIM - 10F22PCA005",
+      "description": "có form ôm sát vào phần chân cũng như phần hông và đùi. Bên cạnh đó, dáng quần jean nam này có phần ống nhỏ dần từ đầu gối trở xuống nhưng ống quần phần này không quá bó vào chân. Được thiết kế từ chất liệu cotton pha polyester với nhiều ưu điểm nổi bật như hút ẩm tốt, khô nhanh, mỏng nhẹ, cực mát và chịu nhiệt. Ngoài ra, quần jean skinny cũng sẽ là lựa chọn số một bởi chiếc quần này sẽ khéo léo khoe trọn vẻ đẹp đôi chân của chàng.",
+      "cost": 100000,
+      "status": null,
+      "category_id": 5,
+      "supplier_id": null,
+      "created_at": null,
+      "updated_at": null,
+      "sale_off": 15,
+      "sale_price": 200000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 5,
+          "size": "XL",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 6,
+          "size": "XS",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "ÁO THUN TAY NGẮN NAM IN HÌNH QUÝ MÃO FORM LOOSE - 10F22TSS016",
+      "description": "có dáng áo slim fit với đặc trưng tôn lên dáng người cân đối cũng như phần vai rộng của phái nam. Sản phẩm này sẽ là lựa chọn hàng đầu của những chàng trai theo đuổi phong cách “đơn giản nhưng không đơn điệu” với chi tiết điểm nhấn là phần chữ thêu ở tay áo trái. Vì đây là dáng áo ôm vào thân người nên chất liệu cotton sẽ giúp người mặc cảm thấy thoải mái và thoáng đạt hơn khi diện",
+      "cost": 420000,
+      "status": null,
+      "category_id": 1,
+      "supplier_id": null,
+      "created_at": null,
+      "updated_at": null,
+      "sale_off": null,
+      "sale_price": 500000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 1,
+          "size": "XS",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 2,
+          "size": "M",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 3,
+          "size": "2XL",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 4,
+          "size": "L",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 5,
+          "size": "XL",
+          "color": "Yellow",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 6,
+          "size": "XS",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 7,
+          "size": "S",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 8,
+          "size": "M",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 9,
+          "size": "L",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 10,
+          "size": "XL",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 11,
+          "size": "2XL",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        },
+        {
+          "id": 12,
+          "size": "3XL",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_black_beauty_2__3_1.jpg"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "ÁO THUN CỔ CAO NAM TAY DÀI TRƠN FORM FITTED - 10F22TSL002",
+      "description": "Sự kết hợp giữa chất vải cotton và spandex mang đến những ưu điểm vượt bậc cho tính năng sản phẩm như: Vải có độ bền cao, thấm hút mồ hôi và co giãn tốt.",
+      "cost": 640000,
+      "status": null,
+      "category_id": 1,
+      "supplier_id": null,
+      "created_at": "2023-01-02T14:01:59.000000Z",
+      "updated_at": "2023-01-02T14:01:59.000000Z",
+      "sale_off": 10,
+      "sale_price": 800000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 13,
+          "size": "XS",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 14,
+          "size": "S",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 15,
+          "size": "XL",
+          "color": "Black",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 16,
+          "size": "M",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 17,
+          "size": "L",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 18,
+          "size": "XL",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 19,
+          "size": "M",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 20,
+          "size": "L",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 21,
+          "size": "XL",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "ÁO SƠ MI NAM TAY NGẮN CO GIÃN FORM LOOSE - 10S22SHS005",
+      "description": "Sự kết hợp giữa chất vải cotton và spandex mang đến những ưu điểm vượt bậc cho tính năng sản phẩm như: Vải có độ bền cao, thấm hút mồ hôi và co giãn tốt.",
+      "cost": 720000,
+      "status": null,
+      "category_id": 1,
+      "supplier_id": null,
+      "created_at": "2023-01-02T14:14:26.000000Z",
+      "updated_at": "2023-01-02T14:14:26.000000Z",
+      "sale_off": null,
+      "sale_price": 920000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 22,
+          "size": "M",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 23,
+          "size": "L",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 24,
+          "size": "L",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        },
+        {
+          "id": 25,
+          "size": "XL",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "ÁO THUN TAY NGẮN UNISEX NHÃN TRANG TRÍ FORM LOOSE - 10F22TSSU001",
+      "description": "Áo thun tay ngắn là một trong những item cơ bản không còn xa lạ thời trang thường ngày. Những chiếc áo thun t-shirt đầu tiên được ra đời vào những thập kỷ đầu của thế kỷ XX được dùng để làm áo lót của những người lính trong quân đội. Cột mốc quan trọng trở thành item “quốc dân” đó là khi các diễn viên Hollywood đưa áo thun trắng lên màn ảnh. Từ đó, áo thun trở thành món đồ thời trang sử dụng phổ biến đến ngày nay",
+      "cost": 240000,
+      "status": null,
+      "category_id": 4,
+      "supplier_id": null,
+      "created_at": "2023-01-04T12:30:40.000000Z",
+      "updated_at": "2023-01-04T12:30:40.000000Z",
+      "sale_off": null,
+      "sale_price": 300000,
+      "quantity": null,
+      "sub_products": [
+        {
+          "id": 26,
+          "size": "M",
+          "color": "White",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10s21tsh019cr2_-_pumice_stone_29_.jpg"
+        },
+        {
+          "id": 27,
+          "size": "L",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10s21tsh019cr2_amber_gold_2__2.jpg"
+        },
+        {
+          "id": 28,
+          "size": "XL",
+          "color": "Red",
+          "quantity": null,
+          "image_url": "https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10s21tsh019cr2_amber_gold_2__2.jpg"
+        }
+      ]
+    }
+  ]
