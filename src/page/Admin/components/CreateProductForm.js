@@ -27,6 +27,7 @@ const CreateProductForm = ({ categories, colors, sizes }) => {
     } catch (error) {
       setIsLoading(false);
       console.log(error);
+      alert("Create product failed");
     }
   };
   const handleAddSubProduct = () => {

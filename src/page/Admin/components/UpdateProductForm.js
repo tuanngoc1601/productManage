@@ -38,8 +38,9 @@ const UpdateProductForm = ({ userProducts, categories }) => {
       const response = await ProductApi.updateProduct(product, productId);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
+      console.log(error);
+      alert("Update product failed");
     }
   };
 
@@ -155,7 +156,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
               </label>
               <input
                 disabled
-                value={updateProduct?.cost ? updateProduct.cost : "No update"}
+                value={updateProduct?.cost ? updateProduct.cost : "Not update"}
               />
             </div>
 
@@ -178,7 +179,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
                 value={
                   updateProduct?.sale_price
                     ? updateProduct.sale_price
-                    : "No update"
+                    : "Not update"
                 }
               />
             </div>

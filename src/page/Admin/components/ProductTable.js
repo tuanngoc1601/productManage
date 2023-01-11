@@ -110,7 +110,7 @@ const ProductTable = ({
                     </p>
                   </td>
                   <td className="border border-slate-300 px-3 py-[6px] w-[120px]">
-                    {product.cost || "No update"}
+                    {product.cost || "Not update"}
                   </td>
                   <td className="border border-slate-300 px-3 py-[6px] w-[160px]">
                     {product.sale_off ? product.sale_off + "%" : "0%"}
