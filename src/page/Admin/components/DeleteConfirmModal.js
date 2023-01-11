@@ -1,14 +1,14 @@
-import ProductApi from "../../api/ProductApi";
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
-import { ProductsList } from "../../recoil/Products";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import ProductApi from "../../../api/ProductApi";
+import { ProductsList } from "../../../recoil/Products";
 const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
   const nagivate = useNavigate();
   const [isDeleting, setIsDeleting] = useState(false);
   const setProducts = useSetRecoilState(ProductsList);
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-90 flex  justify-center">
+    <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-100 flex  justify-center">
       <div className="w-96 max-h-48 bg-white flex flex-col rounded-md mt-20">
         <h1 className="w-full h-10 py-1 bg-blue-700 text-center text-xl font-bold text-white ">
           Xóa sản phẩm

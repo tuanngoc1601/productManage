@@ -3,16 +3,17 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
 import Admin from "./page/Admin";
-import CreateProductForm from "./page/Admin/CreateProductForm";
-import UpdateProductForm from "./page/Admin/UpdateProductForm";
+import Chart from "./page/Admin/Chart";
+import CreateProductForm from "./page/Admin/components/CreateProductForm";
+import UpdateProductForm from "./page/Admin/components/UpdateProductForm";
 import Error from "./page/Error";
-
 function App() {
   const { colors, sizes, categories, userProducts } = useGetAllProductInfo();
   return (
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Chart />} />
         <Route path="/admin" element={<Admin />} />
         <Route
           path="/admin/create-product"

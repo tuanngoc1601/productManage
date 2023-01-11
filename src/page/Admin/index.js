@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import Loading from "../../components/Loading";
 import useGetAllProductInfo from "../../hooks/useGetAllProductInfo";
 import {
   CategoriesList,
@@ -8,8 +9,8 @@ import {
   ProductsList,
   SizesList,
 } from "../../recoil/Products";
-import DeleteConfirmModal from "./DeleteConfirmModal";
-import ProductTable from "./ProductTable";
+import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import ProductTable from "./components/ProductTable";
 const Admin = () => {
   useGetAllProductInfo();
   const products = useRecoilValue(ProductsList);
@@ -18,6 +19,9 @@ const Admin = () => {
   const categories = useRecoilValue(CategoriesList);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
+
+  if (!products) return <Loading />;
+
   return (
     <div className="mt-12 px-20 w-full mb-12">
       <div className="flex justify-between items-center mb-6">

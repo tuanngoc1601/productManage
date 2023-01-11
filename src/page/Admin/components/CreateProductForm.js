@@ -2,10 +2,10 @@ import { useState } from "react";
 import { RiArrowRightLine, RiErrorWarningLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import ProductApi from "../../api/ProductApi";
-import Loading from "../../components/Loading";
-import ProductService from "../../services/ProductService";
-import ValidateProductForm from "../../services/ValidateProductForm";
+import ProductApi from "../../../api/ProductApi";
+import Loading from "../../../components/Loading";
+import ProductService from "../../../services/ProductService";
+import ValidateProductForm from "../../../services/ValidateProductForm";
 import CreateSubPForm from "./CreateSubPForm";
 const CreateProductForm = ({ categories, colors, sizes }) => {
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ const CreateProductForm = ({ categories, colors, sizes }) => {
       const checkValidate = ValidateProductForm.validateProduct(product);
       if (checkValidate) {
         setIsLoading(true);
-        product.status = true;
         const newProduct = await ProductApi.createProduct(product);
         setIsLoading(false);
         navigate("/admin");

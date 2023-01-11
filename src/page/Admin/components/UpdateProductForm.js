@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
-import ProductApi from "../../api/ProductApi";
-import Loading from "../../components/Loading";
-import ProductService from "../../services/ProductService";
+import ProductApi from "../../../api/ProductApi";
+import Loading from "../../../components/Loading";
+import ProductService from "../../../services/ProductService";
 const UpdateProductForm = ({ userProducts, categories }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const updateProduct = userProducts.find(
     (product) => product.id.toString() === productId.toString()
   );
+  const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -20,6 +21,11 @@ const UpdateProductForm = ({ userProducts, categories }) => {
         category_id: updateProduct.category_id,
         description: updateProduct.description,
       });
+      const totalProduct = updateProduct.sub_products.reduce(
+        (acc, item) => (acc += item.quantity),
+        0
+      );
+      setTotal(totalProduct);
     }
     return () => {
       setProduct({});
@@ -101,10 +107,15 @@ const UpdateProductForm = ({ userProducts, categories }) => {
         </div>
 
         <div className="w-2/5 flex flex-col">
-          <div className="mb-8">
-            <label className="text-xl font-medium mb-2 flex items-center">
-              Detail
-            </label>
+          <div className="mb-8 pb-4">
+            <div className="flex items-center mb-2 ">
+              <label className="text-xl font-medium flex items-center mr-8">
+                Detail
+              </label>
+              <button className="px-2 py-1 bg-slate-500 text-white rounded-md">
+                Add
+              </button>
+            </div>
             <table className="w-full">
               <thead>
                 <tr className="my-2">
@@ -114,7 +125,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
                 </tr>
               </thead>
               <tbody className="mt-2">
-                {updateProduct?.sub_products ? (
+                {updateProduct?.sub_products.length > 0 ? (
                   updateProduct?.sub_products.map((item) => (
                     <tr className=" my-1 border-t-[1px] border-b-[1px]">
                       <td>{item.color}</td>
@@ -123,8 +134,15 @@ const UpdateProductForm = ({ userProducts, categories }) => {
                     </tr>
                   ))
                 ) : (
-                  <tr className=" my-1 border-t-[2px]">
+                  <tr className=" my-1 border-t-[1px] border-b-[1px]">
                     <td>No data</td>
+                  </tr>
+                )}
+                {updateProduct?.sub_products.length > 0 && (
+                  <tr className=" my-1 border-t-[1px] border-b-[1px]">
+                    <td className="font-bold">Total</td>
+                    <td></td>
+                    <td className="font-bold">{total}</td>
                   </tr>
                 )}
               </tbody>
@@ -137,7 +155,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
               </label>
               <input
                 disabled
-                value={updateProduct.cost ? updateProduct.cost : "No update"}
+                value={updateProduct?.cost ? updateProduct.cost : "No update"}
               />
             </div>
 
@@ -147,9 +165,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
               </label>
               <input
                 disabled
-                value={
-                  updateProduct.sale_off ? updateProduct.sale_off : "No update"
-                }
+                value={updateProduct?.sale_off ? updateProduct.sale_off : "0%"}
               />
             </div>
 
@@ -160,7 +176,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
               <input
                 disabled
                 value={
-                  updateProduct.sale_price
+                  updateProduct?.sale_price
                     ? updateProduct.sale_price
                     : "No update"
                 }
@@ -181,7 +197,7 @@ const UpdateProductForm = ({ userProducts, categories }) => {
       {isLoading && (
         <div className="w-screen h-screen top-0 fixed left-0 bg-black opacity-70 flex flex-col justify-center items-center">
           <Loading />
-          <span className="text-xl text-white">Updateting...</span>
+          <span className="text-xl text-white">Updating...</span>
         </div>
       )}
     </div>

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import Select from "react-select";
 import { useRecoilValue } from "recoil";
-import { storage } from "../../firebase";
-import { ColorsList, SizesList } from "../../recoil/Products";
-import ProductService from "../../services/ProductService";
+import { storage } from "../../../firebase";
+import { ColorsList, SizesList } from "../../../recoil/Products";
+import ProductService from "../../../services/ProductService";
 const CreateSubPForm = ({ subProduct, setSubProduct }) => {
   const colors = useRecoilValue(ColorsList);
   const sizes = useRecoilValue(SizesList);

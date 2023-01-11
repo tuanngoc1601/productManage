@@ -25,7 +25,7 @@ const useGetAllProductInfo = () => {
         setCateogries(categories);
         setColors(colors);
         setSizes(sizes);
-        setProducts(products);
+        setProducts(products.filter((product) => product.status));
         setUserProducts(userProducts);
       } catch (error) {
         console.log(error);

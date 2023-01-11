@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
-import ProductService from "../../services/ProductService";
+import ProductService from "../../../services/ProductService";
 const ITEM_PER_PAGE = 8;
 const ColorItem = ({ color }) => {
   return (
@@ -113,7 +113,7 @@ const ProductTable = ({
                     {product.cost || "No update"}
                   </td>
                   <td className="border border-slate-300 px-3 py-[6px] w-[160px]">
-                    {product.sale_off ? product.sale_off + "%" : ""}
+                    {product.sale_off ? product.sale_off + "%" : "0%"}
                   </td>
                   <td className="border border-slate-300 px-3 py-[6px] w-[80px]">
                     {
