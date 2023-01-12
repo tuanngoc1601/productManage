@@ -12,6 +12,11 @@ const Navbar = () => {
               Admin
             </Link>
           </li>
+          <li>
+            <Link style={{ textDecoration: "none", color: "#000" }} to="/">
+              Dashboard
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
