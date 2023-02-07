@@ -8,13 +8,13 @@ const Navbar = () => {
       <div className={Styles.nav_center}>
         <ul className={Styles.nav_links}>
           <li>
-            <Link style={{ textDecoration: "none", color: "#000" }} to="/admin">
-              Admin
+            <Link style={{ textDecoration: "none", color: "#000" }} to="/">
+              Dashboard
             </Link>
           </li>
           <li>
-            <Link style={{ textDecoration: "none", color: "#000" }} to="/">
-              Dashboard
+            <Link style={{ textDecoration: "none", color: "#000" }} to="/admin">
+              Admin
             </Link>
           </li>
         </ul>

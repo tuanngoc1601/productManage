@@ -2,12 +2,13 @@ import { useState } from "react";
 import { RiArrowRightLine, RiErrorWarningLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import ProductApi from "../../../api/ProductApi";
-import Loading from "../../../components/Loading";
-import ProductService from "../../../services/ProductService";
-import ValidateProductForm from "../../../services/ValidateProductForm";
-import CreateSubPForm from "./CreateSubPForm";
-const CreateProductForm = ({ categories, colors, sizes }) => {
+import { toast } from "react-toastify";
+import ProductApi from "../../api/ProductApi";
+import Loading from "../../components/Loading";
+import ProductService from "../../services/ProductService";
+import ValidateProductForm from "../../services/ValidateProductForm";
+import CreateSubPForm from "./components/CreateSubPForm";
+const NewProduct = ({ categories, colors, sizes }) => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -17,17 +18,17 @@ const CreateProductForm = ({ categories, colors, sizes }) => {
       const checkValidate = ValidateProductForm.validateProduct(product);
       if (checkValidate) {
         setIsLoading(true);
-        const newProduct = await ProductApi.createProduct(product);
+        await ProductApi.createProduct(product);
         setIsLoading(false);
+        toast.success("Create product successfully");
         navigate("/admin");
       } else {
-        alert("Please fill all fields");
+        toast.warning("Please fill all fields");
         setIsLoading(false);
       }
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
-      alert("Create product failed");
+      toast.error("Create product failed", error);
     }
   };
   const handleAddSubProduct = () => {
@@ -35,9 +36,9 @@ const CreateProductForm = ({ categories, colors, sizes }) => {
       product.sub_products &&
       product.sub_products.hasOwnProperty(Object.keys(subProduct)[0])
     ) {
-      alert("Color already exists");
+      toast.warning("Color already exists");
     } else if (Object.keys(subProduct).length === 0) {
-      alert("Please fill all fields for sub product");
+      toast.warning("Please fill all fields for sub product");
     } else {
       setProduct((prev) => {
         return {
@@ -172,4 +173,4 @@ const CreateProductForm = ({ categories, colors, sizes }) => {
   );
 };
 
-export default CreateProductForm;
+export default NewProduct;

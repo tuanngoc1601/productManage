@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import LoadingTable from "../../../components/LoadingTable";
 import ProductService from "../../../services/ProductService";
-const ITEM_PER_PAGE = 8;
+const ITEM_PER_PAGE = 10;
 const ColorItem = ({ color }) => {
   return (
     <div className="rounded-full border-2 border-slate-300 mr-1">
@@ -21,6 +22,7 @@ const ProductTable = ({
   categories,
   setIsOpenDeleteModal,
   setDeleteItem,
+  loading,
 }) => {
   const [searchProduct, setSearchProduct] = useState([]);
   const pageCount = Math.ceil(searchProduct.length / ITEM_PER_PAGE);
@@ -43,6 +45,11 @@ const ProductTable = ({
   useEffect(() => {
     setProductsPaginate(searchProduct.slice(0, ITEM_PER_PAGE));
   }, [searchProduct]);
+
+  if (!loading) {
+    return <LoadingTable />;
+  }
+
   return (
     <div className="flex flex-col">
       <h4>{searchProduct.length} results</h4>

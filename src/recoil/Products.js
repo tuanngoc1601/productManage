@@ -1,15 +1,5 @@
 import { atom } from "recoil";
 
-export const ProductsList = atom({
-  key: "PRODUCTS_LIST",
-  default: [],
-});
-
-export const UserProductsList = atom({
-  key: "USER_PRODUCTS_LIST",
-  default: [],
-});
-
 export const ColorsList = atom({
   key: "COLORS_LIST",
   default: [],

@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { toast } from "react-toastify";
 import ProductApi from "../../../api/ProductApi";
-import { ProductsList } from "../../../recoil/Products";
+
 const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
-  const nagivate = useNavigate();
   const [isDeleting, setIsDeleting] = useState(false);
-  const setProducts = useSetRecoilState(ProductsList);
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-100 flex  justify-center">
       <div className="w-96 max-h-48 bg-white flex flex-col rounded-md mt-20">
@@ -16,8 +13,8 @@ const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
         {!isDeleting ? (
           <div className="px-2">
             <span className="w-full text-black">
-              Dữ liệu về sản phẩm có thể mất hoàn toàn trong tương lai. Bạn có
-              chắc chắn muốn xóa sản phẩm này ?
+              Data of the product may be lost completely in the future. Are you
+              sure you want to delete this product?
             </span>
             <div className="mt-6 w-full flex justify-end px-2 py-2">
               <button
@@ -26,21 +23,15 @@ const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
                   try {
                     setIsDeleting(true);
                     await ProductApi.deleteProduct(deleteItem);
-                    setProducts((prev) => {
-                      const newProducts = prev.filter(
-                        (product) => product.product_id !== deleteItem
-                      );
-                      return newProducts;
-                    });
+                    toast.success("Delete product successfully!");
                     setIsOpenDeleteModal(false);
-                    nagivate(0);
                   } catch (error) {
+                    toast.error("Delete product failed!");
                     setIsOpenDeleteModal(false);
-                    console.log(error);
                   }
                 }}
               >
-                Xác nhận
+                Confirm
               </button>
               <button
                 className="px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-slate-700"
@@ -48,7 +39,7 @@ const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
                   setIsOpenDeleteModal(false);
                 }}
               >
-                Hủy
+                Cancel
               </button>
             </div>
           </div>

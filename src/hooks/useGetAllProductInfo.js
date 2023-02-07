@@ -1,39 +1,26 @@
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import ProductApi from "../api/ProductApi";
-import {
-  CategoriesList,
-  ColorsList,
-  ProductsList,
-  SizesList,
-  UserProductsList,
-} from "../recoil/Products";
 const useGetAllProductInfo = () => {
-  const [categories, setCateogries] = useRecoilState(CategoriesList);
-  const [colors, setColors] = useRecoilState(ColorsList);
-  const [sizes, setSizes] = useRecoilState(SizesList);
-  const [products, setProducts] = useRecoilState(ProductsList);
-  const [userProducts, setUserProducts] = useRecoilState(UserProductsList);
+  const [products, setProducts] = useState([]);
+  const [userProducts, setUserProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data: categories } = await ProductApi.getAllCategories();
-        const { data: colors } = await ProductApi.getAllColors();
-        const { data: sizes } = await ProductApi.getAllSizes();
         const { data: products } = await ProductApi.getAllProducts();
         const { data: userProducts } = await ProductApi.getAllUserProducts();
-        setCateogries(categories);
-        setColors(colors);
-        setSizes(sizes);
         setProducts(products.filter((product) => product.status));
         setUserProducts(userProducts);
+        setLoading(true);
       } catch (error) {
-        console.log(error);
+        toast.error("GET PRODUCTS ERR: ", error.response.data.message);
+        setLoading(true);
       }
     };
     getData();
   }, []);
-  return { categories, colors, sizes, products, userProducts };
+  return { products, userProducts, loading };
 };
 
 export default useGetAllProductInfo;

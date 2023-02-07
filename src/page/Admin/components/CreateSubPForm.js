@@ -2,6 +2,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import Select from "react-select";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import { storage } from "../../../firebase";
 import { ColorsList, SizesList } from "../../../recoil/Products";
@@ -28,7 +29,7 @@ const CreateSubPForm = ({ subProduct, setSubProduct }) => {
         }
       );
     } catch (error) {
-      console.log("Error uploading file: ", error);
+      toast.error("Error uploading file: ", error);
     }
   };
 

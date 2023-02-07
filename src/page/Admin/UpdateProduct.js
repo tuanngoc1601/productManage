@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
-import ProductApi from "../../../api/ProductApi";
-import Loading from "../../../components/Loading";
-import ProductService from "../../../services/ProductService";
-const UpdateProductForm = ({ userProducts, categories }) => {
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProductApi from "../../api/ProductApi";
+import Loading from "../../components/Loading";
+import ProductService from "../../services/ProductService";
+const UpdateProduct = ({ userProducts, categories }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const updateProduct = userProducts.find(
@@ -35,17 +37,21 @@ const UpdateProductForm = ({ userProducts, categories }) => {
   const handleUpdateProduct = async () => {
     try {
       setIsLoading(true);
-      const response = await ProductApi.updateProduct(product, productId);
+      await ProductApi.updateProduct(product, productId);
+      toast.success("Update product successfully", {
+        theme: "colored",
+      });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
-      alert("Update product failed");
+      toast.error("Update product failed");
     }
   };
 
   return (
     <div className="mt-12 px-44 w-full flex relative flex-col justify-center">
+      <div className="fixed top-12 w-12 h-36"></div>
       <div className="w-full flex relative">
         <div className="w-3/5 pr-20">
           <div className="flex flex-col mb-4">
@@ -205,4 +211,4 @@ const UpdateProductForm = ({ userProducts, categories }) => {
   );
 };
 
-export default UpdateProductForm;
+export default UpdateProduct;

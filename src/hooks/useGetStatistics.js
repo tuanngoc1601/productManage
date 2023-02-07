@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import StatisticsApi from "../api/StatisticsApi";
 const useGetStatistics = () => {
   const [categoriySatisctics, setCategoryStatistics] = useState([]);
@@ -11,7 +12,7 @@ const useGetStatistics = () => {
         const response2 = await StatisticsApi.getNewProducts();
         setNewProducts(response2.data);
       } catch (error) {
-        console.log("Failed to fetch category statistics: ", error);
+        toast.error("Failed to fetch category statistics: ", Error);
       }
     };
     fetchCategoryStatistics();

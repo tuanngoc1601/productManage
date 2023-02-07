@@ -4,7 +4,6 @@ class ProductApi {
     const url = "/products";
     return await axiosClient.get(url);
   };
-
   static getAllUserProducts = async () => {
     const url = "/user/products";
     return await axiosClient.get(url);
