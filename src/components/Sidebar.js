@@ -69,7 +69,7 @@ const Sidebar = () => {
                     {categoryList.map((category) => {
                         return (
                             <div key={category.id} className={Styles.form_group_checkbox}>
-                                <input type="checkbox" id="ao" value="ao" name="category" className={Styles.input_checkbox} onChange={handleChange} />
+                                <input type="checkbox" id="ao" value={category.id} name="category" className={Styles.input_checkbox} onChange={handleChange} />
                                 <label className={Styles.input_label}>{category.name}</label>
                             </div>
                         )
@@ -90,7 +90,7 @@ const Sidebar = () => {
                     {colorList.map((color) => {
                         return (
                             <div key={color.id} className={Styles.form_group_checkbox}>
-                                <input type="checkbox" id={color.name} value={color.name} name="color" className={Styles.input_checkbox} onChange={handleChange} />
+                                <input type="checkbox" id={color.name} value={color.id} name="color" className={Styles.input_checkbox} onChange={handleChange} />
                                 <label htmlFor={color.name} className={Styles.input_label}>{color.name}</label>
                                 <div className={Styles.color_filer} style={{ backgroundColor: `${color.code}` }}></div>
                             </div>
@@ -119,11 +119,11 @@ const Sidebar = () => {
                     </div>
                     <div className={Styles.form_group_checkbox}>
                         <input type="checkbox" id="3" value="3" name="price" className={Styles.input_checkbox} onChange={handleChange} />
-                        <label htmlFor="3" className={Styles.input_label}>Từ 200.000 - 500.000 đ</label>
+                        <label htmlFor="3" className={Styles.input_label}>Từ 200.000 - 300.000 đ</label>
                     </div>
                     <div className={Styles.form_group_checkbox}>
                         <input type="checkbox" id="4" value="4" name="price" className={Styles.input_checkbox} onChange={handleChange} />
-                        <label htmlFor="4" className={Styles.input_label}>Từ 500.000 trở lên</label>
+                        <label htmlFor="4" className={Styles.input_label}>Từ 3j00.000 trở lên</label>
                     </div>
                 </>}
             </div>

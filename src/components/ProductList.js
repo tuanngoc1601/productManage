@@ -15,32 +15,19 @@ const ProductList = () => {
     const handleSearchTextChange = (e) => {
         setSearchText(e.target.value);
     }
-    const getCategoryNameById = (id, categories) => {
-        let newCategory = categories.find((category => {
-            return category.id === id;
-        }))
-        return newCategory.name;
+    const unique = (arr) => {
+        var newArr = []
+        for (var i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i]) === -1) newArr.push(arr[i]);
+        }
+        return newArr;
     }
-    const getColorNameById = (id, colors) => {
-        let newColor = colors.find((color) => {
-            return color.id === id;
-        })
-        return newColor.name;
-    }
-    const getSubProductsById = (id, products) => {
-        let newProduct = products.map((product) => {
-            return product.id === id;
-        })
-        return newProduct.sub_products;
-    }
-    const getAllColorById = (id, products) => {
-        let arrayColorId = [];
-        arrayColorId = getSubProductsById(id, products).forEach((subProduct) => {
-            if(!arrayColorId.includes(subProduct.color_id)) {
-                arrayColorId.push(subProduct.color_id);
-            }
-        })
-        return arrayColorId;
+    const getAllColorId = (product) => {
+        let colorIds = product.sub_products.map(subProduct => {
+            return subProduct.color_id;
+        });
+        colorIds = unique(colorIds);
+        return colorIds;
     }
     useEffect(() => {
         let newProducts = productList;
@@ -56,27 +43,52 @@ const ProductList = () => {
     }, [searchText, productList]);
 
     useEffect(() =>{
-        let newValueFilter = valueFilter;
-        let productFilter = productList;
-        if(newValueFilter.category.length > 0) {
-            let categoryFilterProducts = productFilter.map(product => {
-                return newValueFilter.category.includes(getCategoryNameById(product.category_id, categoryList));
-            }) 
-            setProducts(categoryFilterProducts);
-        }
-        if(newValueFilter.color.length > 0) {
-            let colorFilterProducts = [];
-            productFilter.forEach(product => {
-                let productIdsColor = getAllColorById(product.id, products);
-                for(let i = 0; i < productIdsColor.length; i++) {
-                    if(!newValueFilter.color.includes(getColorNameById(productIdsColor[i]))) {
-                        colorFilterProducts.push(product);
+        // let newValueFilter = valueFilter;
+        let newListProductFilter = [];
+        for(let i = 0; i < productList.length; i++) {
+            let filterCategory = false;
+            let filterColor = false;
+            let filterPrice = false;
+            if(valueFilter.category.length > 0) {
+                for(let j = 0; j < valueFilter.category.length; j++) {
+                    if(valueFilter.category[j] == productList[i].category_id) {
+                        filterCategory = true;
                         break;
                     }
                 }
-            })
-            setProducts(colorFilterProducts);
+            } else filterCategory = true;
+            if(valueFilter.color.length > 0) {
+                let listColor = getAllColorId(productList[i]);
+                for(let j = 0; j < listColor.length; j++) {
+                    if(valueFilter.color.indexOf(listColor[j].toString()) !== -1) {
+                        filterColor = true;
+                        break;
+                    }
+                }
+            } else filterColor = true;
+            if(valueFilter.price.length > 0) {
+                for(let j = 0; j < valueFilter.price.length; j++) {
+                    if(valueFilter.price[j] === "1" && productList[i].sale_price < 100000) {
+                        filterPrice = true;
+                        break;
+                    }
+                    if(valueFilter.price[j] === "2" && productList[i].sale_price >= 100000 && productList[i].sale_price < 200000) {
+                        filterPrice = true;
+                        break;
+                    }
+                    if(valueFilter.price[j] === "3" && productList[i].sale_price >= 200000 && productList[i].sale_price < 300000) {
+                        filterPrice = true;
+                        break;
+                    }
+                    if(valueFilter.price[j] === "4" && productList[i].sale_price >= 300000) {
+                        filterPrice = true;
+                        break;
+                    }
+                }
+            } else filterPrice = true;
+            if(filterCategory && filterColor && filterPrice) newListProductFilter.push(productList[i]);
         }
+        setProducts(newListProductFilter);
     }, [changeFilter])
 
     if (loading) {
