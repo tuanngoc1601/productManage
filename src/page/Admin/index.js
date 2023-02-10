@@ -12,7 +12,6 @@ const Admin = () => {
   const categories = useRecoilValue(CategoriesList);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
-
   return (
     <div className="mt-12 px-20 w-full mb-12">
       <div className="flex justify-between items-center mb-6">
@@ -36,6 +35,7 @@ const Admin = () => {
         <DeleteConfirmModal
           setIsOpenDeleteModal={setIsOpenDeleteModal}
           deleteItem={deleteItem}
+          products={products}
         />
       )}
     </div>

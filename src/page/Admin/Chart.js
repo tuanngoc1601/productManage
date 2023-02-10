@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Loading from "../../components/Loading/Loading";
 import useGetStatistics from "../../hooks/useGetStatistics";
 import CaregoryChart from "./components/Charts/CaregoryChart";
 import CaregoryChart2 from "./components/Charts/CaregoryChart2";
@@ -6,6 +7,9 @@ import NewProductChart from "./components/Charts/NewProductChart";
 const Chart = () => {
   const { newProducts, categoriySatisctics } = useGetStatistics();
   const [changeChart, setChangeChart] = useState(false);
+
+  if (newProducts.length <= 0 || categoriySatisctics <= 0) return <Loading />;
+
   return (
     <div className="flex mx-20 py-8 justify-around">
       <div className="w-2/5 mr-24">

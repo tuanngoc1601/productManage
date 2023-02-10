@@ -46,7 +46,7 @@ const CaregoryChart2 = ({ categoriySatisctics }) => {
             },
             title: {
               display: true,
-              text: "Thống kê sản phẩm theo danh mục",
+              text: "Statistics by category",
             },
           },
         }}

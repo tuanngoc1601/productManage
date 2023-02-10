@@ -7,7 +7,6 @@ import FireWork from "./components/FireWork";
 import Navbar from "./components/Navbar";
 import useGetAllCategory from "./hooks/useGetAllCategory";
 import useGetAllColor from "./hooks/useGetAllColor";
-import useGetAllProductInfo from "./hooks/useGetAllProductInfo";
 import useGetAllSize from "./hooks/useGetAllSize";
 import Admin from "./page/Admin";
 import Chart from "./page/Admin/Chart";
@@ -18,7 +17,6 @@ function App() {
   const colors = useGetAllColor();
   const sizes = useGetAllSize();
   const categories = useGetAllCategory();
-  const { userProducts } = useGetAllProductInfo();
   return (
     <>
       <ToastContainer />
@@ -35,12 +33,7 @@ function App() {
         />
         <Route
           path="/admin/update-product/:productId"
-          element={
-            <UpdateProduct
-              userProducts={userProducts}
-              categories={categories}
-            />
-          }
+          element={<UpdateProduct categories={categories} />}
         />
         <Route path="/error" element={<Error />} />
       </Routes>

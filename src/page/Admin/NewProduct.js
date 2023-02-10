@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import ProductApi from "../../api/ProductApi";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading";
 import ProductService from "../../services/ProductService";
 import ValidateProductForm from "../../services/ValidateProductForm";
 import CreateSubPForm from "./components/CreateSubPForm";
@@ -52,7 +52,7 @@ const NewProduct = ({ categories, colors, sizes }) => {
     }
   };
   return (
-    <div className="mt-12 px-44 w-full flex relative flex-col justify-center">
+    <div className="mt-12 px-20 w-full flex relative flex-col justify-center">
       <div className="w-full flex relative">
         <div className="w-3/5 pr-20">
           <div className="flex flex-col mb-4">

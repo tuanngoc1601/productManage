@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductApi from "../api/ProductApi";
-const useGetAllProductInfo = () => {
-  const [products, setProducts] = useState([]);
+const useGetUserProductById = (id) => {
+  const [userProduct, setUserProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data: products } = await ProductApi.getAllProducts();
-        setProducts(products.filter((product) => product.status));
+        const { data: product } = await ProductApi.getAllUserProductById(id);
+        setUserProduct(product);
         setLoading(true);
       } catch (error) {
         toast.error("GET PRODUCTS ERR: ", error.response.data.message);
@@ -17,7 +17,7 @@ const useGetAllProductInfo = () => {
     };
     getData();
   }, []);
-  return { products, loading };
+  return { userProduct, loading };
 };
 
-export default useGetAllProductInfo;
+export default useGetUserProductById;

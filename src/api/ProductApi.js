@@ -12,6 +12,10 @@ class ProductApi {
     const url = `/products/${id}`;
     return await axiosClient.get(url);
   };
+  static getAllUserProductById = async (id) => {
+    const url = `/user/products/${id}`;
+    return await axiosClient.get(url);
+  };
   static getAllColors = async () => {
     const url = "/colors";
     return await axiosClient.get(url);

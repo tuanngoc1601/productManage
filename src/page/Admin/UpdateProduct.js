@@ -5,14 +5,14 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductApi from "../../api/ProductApi";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Loading/Loading";
+import LoadingUpdateProduct from "../../components/Loading/LoadingUpdateProduct";
+import useGetUserProductById from "../../hooks/useGetUserProductById";
 import ProductService from "../../services/ProductService";
-const UpdateProduct = ({ userProducts, categories }) => {
+const UpdateProduct = ({ categories }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
-  const updateProduct = userProducts.find(
-    (product) => product.id.toString() === productId.toString()
-  );
+  let { userProduct: updateProduct } = useGetUserProductById(productId);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +23,7 @@ const UpdateProduct = ({ userProducts, categories }) => {
         category_id: updateProduct.category_id,
         description: updateProduct.description,
       });
-      const totalProduct = updateProduct.sub_products.reduce(
+      const totalProduct = updateProduct.sub_products?.reduce(
         (acc, item) => (acc += item.quantity),
         0
       );
@@ -49,8 +49,10 @@ const UpdateProduct = ({ userProducts, categories }) => {
     }
   };
 
+  if (!updateProduct.sub_products) return <LoadingUpdateProduct />;
+
   return (
-    <div className="mt-12 px-44 w-full flex relative flex-col justify-center">
+    <div className="mt-12 px-20 w-full flex relative flex-col justify-center">
       <div className="fixed top-12 w-12 h-36"></div>
       <div className="w-full flex relative">
         <div className="w-3/5 pr-20">
@@ -132,7 +134,7 @@ const UpdateProduct = ({ userProducts, categories }) => {
                 </tr>
               </thead>
               <tbody className="mt-2">
-                {updateProduct?.sub_products.length > 0 ? (
+                {updateProduct && updateProduct?.sub_products?.length > 0 ? (
                   updateProduct?.sub_products.map((item) => (
                     <tr className=" my-1 border-t-[1px] border-b-[1px]">
                       <td>{item.color}</td>
@@ -145,7 +147,7 @@ const UpdateProduct = ({ userProducts, categories }) => {
                     <td>No data</td>
                   </tr>
                 )}
-                {updateProduct?.sub_products.length > 0 && (
+                {updateProduct && updateProduct?.sub_products?.length > 0 && (
                   <tr className=" my-1 border-t-[1px] border-b-[1px]">
                     <td className="font-bold">Total</td>
                     <td></td>

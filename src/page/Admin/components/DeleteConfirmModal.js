@@ -1,9 +1,22 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import ProductApi from "../../../api/ProductApi";
-
-const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
+const DeleteConfirmModal = ({
+  setIsOpenDeleteModal,
+  deleteItem,
+}) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      await ProductApi.deleteProduct(deleteItem);
+      toast.success("Delete product successfully!");
+      setIsOpenDeleteModal(false);
+    } catch (error) {
+      toast.error("Delete product failed!");
+      setIsOpenDeleteModal(false);
+    }
+  };
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-100 flex  justify-center">
       <div className="w-96 max-h-48 bg-white flex flex-col rounded-md mt-20">
@@ -19,25 +32,13 @@ const DeleteConfirmModal = ({ setIsOpenDeleteModal, deleteItem }) => {
             <div className="mt-6 w-full flex justify-end px-2 py-2">
               <button
                 className=" px-3 py-2 bg-red-500 text-black rounded-md mr-2 hover:bg-red-700 hover:after:text-white"
-                onClick={async () => {
-                  try {
-                    setIsDeleting(true);
-                    await ProductApi.deleteProduct(deleteItem);
-                    toast.success("Delete product successfully!");
-                    setIsOpenDeleteModal(false);
-                  } catch (error) {
-                    toast.error("Delete product failed!");
-                    setIsOpenDeleteModal(false);
-                  }
-                }}
+                onClick={handleDelete}
               >
                 Confirm
               </button>
               <button
                 className="px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-slate-700"
-                onClick={() => {
-                  setIsOpenDeleteModal(false);
-                }}
+                onClick={() => setIsOpenDeleteModal(false)}
               >
                 Cancel
               </button>
