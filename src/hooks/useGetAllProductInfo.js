@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductApi from "../api/ProductApi";
-const useGetAllProductInfo = () => {
+const useGetAllProductInfo = (depen) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -16,7 +16,7 @@ const useGetAllProductInfo = () => {
       }
     };
     getData();
-  }, []);
+  }, [depen]);
   return { products, loading };
 };
 

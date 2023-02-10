@@ -6,12 +6,14 @@ import { CategoriesList, ColorsList, SizesList } from "../../recoil/Products";
 import DeleteConfirmModal from "./components/DeleteConfirmModal";
 import ProductTable from "./components/ProductTable";
 const Admin = () => {
-  const { products, loading } = useGetAllProductInfo();
+  const [deleteProduct, setDeleteProduct] = useState(true);
+  const { products, loading } = useGetAllProductInfo(deleteProduct);
   const sizes = useRecoilValue(SizesList);
   const colors = useRecoilValue(ColorsList);
   const categories = useRecoilValue(CategoriesList);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
+
   return (
     <div className="mt-12 px-20 w-full mb-12">
       <div className="flex justify-between items-center mb-6">
@@ -36,6 +38,7 @@ const Admin = () => {
           setIsOpenDeleteModal={setIsOpenDeleteModal}
           deleteItem={deleteItem}
           products={products}
+          setDeleteProduct={setDeleteProduct}
         />
       )}
     </div>

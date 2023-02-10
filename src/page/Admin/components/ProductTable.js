@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
-import LoadingTable from "../../../components/Loading/LoadingTable";
+import LoadingTable from "../../../components/LoadingTable";
 import ProductService from "../../../services/ProductService";
 const ITEM_PER_PAGE = 10;
 const ColorItem = ({ color }) => {

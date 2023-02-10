@@ -4,6 +4,7 @@ import ProductApi from "../../../api/ProductApi";
 const DeleteConfirmModal = ({
   setIsOpenDeleteModal,
   deleteItem,
+  setDeleteProduct,
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const handleDelete = async () => {
@@ -12,6 +13,7 @@ const DeleteConfirmModal = ({
       await ProductApi.deleteProduct(deleteItem);
       toast.success("Delete product successfully!");
       setIsOpenDeleteModal(false);
+      setDeleteProduct((prev) => !prev);
     } catch (error) {
       toast.error("Delete product failed!");
       setIsOpenDeleteModal(false);
