@@ -28,7 +28,12 @@ const NewProduct = ({ categories, colors, sizes }) => {
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error("Create product failed", error);
+      const listErrors = error.response.data;
+      if (listErrors) {
+        listErrors.errors.forEach((error) => {
+          toast.error(error);
+        });
+      }
     }
   };
   const handleAddSubProduct = () => {
