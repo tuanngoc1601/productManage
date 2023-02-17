@@ -33,8 +33,8 @@ const Product = ({ id, name, status, category_id, sale_off, sale_price, sub_prod
                     <p className={Styles.product_name}>{name}</p>
                     <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         {sale_off ? <span className={Styles.price}>{sale_price - sale_price * sale_off / 100}&nbsp;₫</span> : <span className={Styles.price}>{sale_price}&nbsp;₫</span>}
-                        {sale_off && <span style={{ fontSize: '16px', color: '#939393', fontWeight: '400' }} className="text-decoration-line-through">{sale_price}&nbsp;₫</span>}
-                        {sale_off && <span className={Styles.sale_off}>{sale_off}%</span>}
+                        {sale_off != 0 && <span style={{ fontSize: '16px', color: '#939393', fontWeight: '400' }} className="text-decoration-line-through">{sale_price}&nbsp;₫</span>}
+                        {sale_off != 0 && <span className={Styles.sale_off}>{sale_off}%</span>}
                     </div>
                     {sub_products.length !== 0 &&
                         <div className={Styles.variants}>

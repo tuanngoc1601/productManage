@@ -26,33 +26,11 @@ const AppProvider = ({ children }) => {
             const responseColors = await fetch('https://p01-product-api-production.up.railway.app/api/colors');
             const dataColors = await responseColors.json();
             if (dataProducts.message === 'success') {
-                const newDataProducts = dataProducts.data.map((product) => {
-                    const {
-                        id,
-                        name,
-                        description,
-                        cost,
-                        status,
-                        category_id,
-                        supplier_id,
-                        sale_off,
-                        sale_price,
-                        quantity,
-                        sub_products
-                    } = product;
-                    return {
-                        id: id,
-                        name: name,
-                        description: description,
-                        cost: cost,
-                        status: status,
-                        category_id: category_id,
-                        supplier_id: supplier_id,
-                        sale_off: sale_off,
-                        sale_price: sale_price,
-                        quantity: quantity,
-                        sub_products: sub_products
-                    };
+                let newDataProducts = [];
+                dataProducts.data.forEach((product) => {
+                    if(product.sale_price) {
+                        newDataProducts.push(product)
+                    }
                 });
                 setProductList(newDataProducts);
                 setLoading(false);
