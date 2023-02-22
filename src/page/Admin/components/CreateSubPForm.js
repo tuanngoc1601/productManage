@@ -7,29 +7,36 @@ import { useRecoilValue } from "recoil";
 import { storage } from "../../../firebase";
 import { ColorsList, SizesList } from "../../../recoil/Products";
 import ProductService from "../../../services/ProductService";
-const CreateSubPForm = ({ subProduct, setSubProduct }) => {
+import { isFileImage } from "../../../utils";
+const CreateSubPForm = ({ setSubProduct, subProduct }) => {
   const colors = useRecoilValue(ColorsList);
   const sizes = useRecoilValue(SizesList);
   const [imgUrls, setImgUrls] = useState([]);
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
+  const [loading, setLoading] = useState(false);
   const handleChangeImg = async (e) => {
     try {
+      if (imgUrls.length > 0) return toast.error("Only one image per color");
       const file = e.target.files[0];
+      if (isFileImage(file) === false) return toast.error("File is not image");
+      setLoading(true);
       const imageRef = ref(storage, `images/${file.name}`);
       const uploadTask = uploadBytesResumable(imageRef, file);
       uploadTask.on(
         "state_changed",
         (snapshot) => {},
-        (err) => console.log(err),
+        (err) => toast.error(err),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             setImgUrls((prev) => [...prev, url]);
+            setLoading(false);
           });
         }
       );
     } catch (error) {
-      toast.error("Error uploading file: ", error);
+      toast.error("Error uploading file ", error);
+      setLoading(false);
     }
   };
 
@@ -49,6 +56,7 @@ const CreateSubPForm = ({ subProduct, setSubProduct }) => {
   return (
     <div className="mt-2 border-b-2 border-dashed border-gray-500">
       <div className="w-full flex justify-between">
+        {/* Add color */}
         <div className="flex flex-1 flex-col mb-4  mr-4">
           <label className="text-xl font-medium mb-2 flex items-center">
             Add color <RiErrorWarningLine className="ml-2" />
@@ -76,6 +84,7 @@ const CreateSubPForm = ({ subProduct, setSubProduct }) => {
             }}
           />
         </div>
+        {/* Add size */}
         <div className="flex flex-1 flex-col">
           <label className="text-xl font-medium mb-2 flex items-center">
             Add size <RiErrorWarningLine className="ml-2" />
@@ -89,6 +98,7 @@ const CreateSubPForm = ({ subProduct, setSubProduct }) => {
           />
         </div>
       </div>
+      {/* Add image */}
       <div className="mb-8 w-full">
         <label className="text-xl font-medium mb-2 flex items-center">
           Product image <RiErrorWarningLine className="ml-2" />
@@ -126,21 +136,25 @@ const CreateSubPForm = ({ subProduct, setSubProduct }) => {
               </div>
             </div>
           </div>
-          <div className="flex ml-4 overflow-x-hidden flex-wrap">
-            {imgUrls.map((url) => (
-              <div className="h-24 w-28 mr-2 mb-1 relative" key={url}>
-                <img className="w-full h-full" src={url} alt="product" />
-                <span
-                  className="absolute -top-2 right-0 p-1 cursor-pointer"
-                  onClick={() => {
-                    setImgUrls((prev) => prev.filter((item) => item !== url));
-                  }}
-                >
-                  x
-                </span>
-              </div>
-            ))}
-          </div>
+          {!loading ? (
+            <div className="flex ml-4 overflow-x-hidden flex-wrap">
+              {imgUrls.map((url) => (
+                <div className="h-24 w-28 mr-2 mb-1 relative" key={url}>
+                  <img className="w-full h-full" src={url} alt="product" />
+                  <span
+                    className="absolute -top-2 right-0 p-1 cursor-pointer"
+                    onClick={() => {
+                      setImgUrls((prev) => prev.filter((item) => item !== url));
+                    }}
+                  >
+                    x
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div> Uploading...</div>
+          )}
         </div>
       </div>
     </div>

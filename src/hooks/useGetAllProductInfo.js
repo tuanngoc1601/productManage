@@ -11,7 +11,7 @@ const useGetAllProductInfo = (depen) => {
         setProducts(products.filter((product) => product.status));
         setLoading(true);
       } catch (error) {
-        toast.error("GET PRODUCTS ERR: ", error.response.data.message);
+        toast.error("GET PRODUCTS ERR ", error.response.data.message);
         setLoading(true);
       }
     };

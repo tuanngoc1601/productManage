@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductApi from "../api/ProductApi";
-const useGetUserProductById = (id) => {
+const useGetUserProductById = (id, depen) => {
   const [userProduct, setUserProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -11,12 +11,12 @@ const useGetUserProductById = (id) => {
         setUserProduct(product);
         setLoading(true);
       } catch (error) {
-        toast.error("GET PRODUCTS ERR: ", error.response.data.message);
+        toast.error("GET PRODUCTS ERR ", error.response.data.message);
         setLoading(true);
       }
     };
     getData();
-  }, []);
+  }, [id, depen]);
   return { userProduct, loading };
 };
 

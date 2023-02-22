@@ -8,7 +8,7 @@ import Loading from "../../components/Loading/Loading";
 import ProductService from "../../services/ProductService";
 import ValidateProductForm from "../../services/ValidateProductForm";
 import CreateSubPForm from "./components/CreateSubPForm";
-const NewProduct = ({ categories, colors, sizes }) => {
+const Product = ({ categories, colors, sizes }) => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -16,14 +16,16 @@ const NewProduct = ({ categories, colors, sizes }) => {
   const handleCreateProduct = async () => {
     try {
       const checkValidate = ValidateProductForm.validateProduct(product);
-      if (checkValidate) {
+      if (checkValidate.status) {
         setIsLoading(true);
         await ProductApi.createProduct(product);
         setIsLoading(false);
         toast.success("Create product successfully");
-        navigate("/admin");
+        navigate("/product");
       } else {
-        toast.warning("Please fill all fields");
+        checkValidate.erors.forEach((error) => {
+          toast.error(error);
+        });
         setIsLoading(false);
       }
     } catch (error) {
@@ -56,6 +58,9 @@ const NewProduct = ({ categories, colors, sizes }) => {
       });
     }
   };
+
+  if (isLoading) return <Loading />;
+
   return (
     <div className="mt-12 px-20 w-full flex relative flex-col justify-center">
       <div className="w-full flex relative">
@@ -168,14 +173,8 @@ const NewProduct = ({ categories, colors, sizes }) => {
           Create new product
         </button>
       </div>
-      {isLoading && (
-        <div className="w-screen h-screen top-0 fixed left-0 bg-black opacity-70 flex flex-col justify-center items-center">
-          <Loading />
-          <span className="text-xl text-white">Creating...</span>
-        </div>
-      )}
     </div>
   );
 };
 
-export default NewProduct;
+export default Product;

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import LoadingTable from "../../../components/LoadingTable";
+import { SearchNavbarValue } from "../../../recoil/SearchValues";
 import ProductService from "../../../services/ProductService";
+import { removeAccents } from "../../../utils";
 const ITEM_PER_PAGE = 10;
 const ColorItem = ({ color }) => {
   return (
@@ -29,6 +32,7 @@ const ProductTable = ({
   const [searchCondition, setSearchCondition] = useState({});
   const [productsPaginate, setProductsPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue] = useRecoilState(SearchNavbarValue);
   useEffect(() => {
     if (searchCondition.category && parseInt(searchCondition.category) !== 0) {
       const search = products.filter(
@@ -41,7 +45,19 @@ const ProductTable = ({
     }
     setCurrentPage(1);
   }, [searchCondition, products]);
-
+  useEffect(() => {
+    if (searchValue) {
+      const search = products.filter((product) =>
+        removeAccents(product.name)
+          .toLowerCase()
+          .includes(removeAccents(searchValue).toLowerCase())
+      );
+      setSearchProduct(search);
+    } else {
+      setSearchProduct(products);
+    }
+    setCurrentPage(1);
+  }, [searchValue, products]);
   useEffect(() => {
     setProductsPaginate(searchProduct.slice(0, ITEM_PER_PAGE));
   }, [searchProduct]);
@@ -162,7 +178,7 @@ const ProductTable = ({
                     <div className="flex flex-nowrap">
                       <button className="px-2 py-1 rounded-sm bg-blue-300 hover:bg-blue-500 hover:text-white mr-2 font-semibold ">
                         <Link
-                          to={`/admin/update-product/${product.id}`}
+                          to={`/product/update-product/${product.id}`}
                           className="no-underline"
                         >
                           Update

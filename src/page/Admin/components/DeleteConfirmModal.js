@@ -23,7 +23,7 @@ const DeleteConfirmModal = ({
     <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-100 flex  justify-center">
       <div className="w-96 max-h-48 bg-white flex flex-col rounded-md mt-20">
         <h1 className="w-full h-10 py-1 bg-blue-700 text-center text-xl font-bold text-white ">
-          Xóa sản phẩm
+          Delete product
         </h1>
         {!isDeleting ? (
           <div className="px-2">

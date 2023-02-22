@@ -8,9 +8,12 @@ import Navbar from "./components/Navbar";
 import useGetAllCategory from "./hooks/useGetAllCategory";
 import useGetAllColor from "./hooks/useGetAllColor";
 import useGetAllSize from "./hooks/useGetAllSize";
-import Admin from "./page/Admin";
+import ManageProduct from "./page/Admin";
+import Category from "./page/Admin/Category";
 import Chart from "./page/Admin/Chart";
-import NewProduct from "./page/Admin/NewProduct";
+import Color from "./page/Admin/Color";
+import Product from "./page/Admin/Product";
+import Size from "./page/Admin/Size";
 import UpdateProduct from "./page/Admin/UpdateProduct";
 import Error from "./page/Error";
 function App() {
@@ -24,17 +27,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Chart />} />
         <Route path="/firework" element={<FireWork />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/product" element={<ManageProduct />} />
         <Route
-          path="/admin/create-product"
+          path="/product/create-product"
           element={
-            <NewProduct sizes={sizes} colors={colors} categories={categories} />
+            <Product sizes={sizes} colors={colors} categories={categories} />
           }
         />
         <Route
-          path="/admin/update-product/:productId"
+          path="/product/update-product/:productId"
           element={<UpdateProduct categories={categories} />}
         />
+        <Route path="/product/category" element={<Category />} />
+        <Route path="/product/color" element={<Color />} />
+        <Route path="/product/size" element={<Size />} />
         <Route path="/error" element={<Error />} />
       </Routes>
     </>
