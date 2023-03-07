@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import ProductApi from "../../api/ProductApi";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 import ProductService from "../../services/ProductService";
 import ValidateProductForm from "../../services/ValidateProductForm";
 import CreateSubPForm from "./components/CreateSubPForm";

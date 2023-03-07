@@ -5,7 +5,9 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useRecoilValue } from "recoil";
 import useGetAllProductInfo from "../../hooks/useGetAllProductInfo";
-import { CategoriesList, ColorsList, SizesList } from "../../recoil/Products";
+import { CategoriesList } from "../../store/CategoryState";
+import { ColorsList } from "../../store/ColorState";
+import { SizesList } from "../../store/SizeState";
 import DeleteConfirmModal from "./components/DeleteConfirmModal";
 import ProductTable from "./components/ProductTable";
 

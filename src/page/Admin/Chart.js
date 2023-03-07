@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 import useGetStatistics from "../../hooks/useGetStatistics";
 import CaregoryChart from "./components/Charts/CaregoryChart";
 import CaregoryChart2 from "./components/Charts/CaregoryChart2";

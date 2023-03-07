@@ -19,6 +19,7 @@ class StatisticService {
         },
       },
     };
+
     const dataCategory1 = dataCategoryArr.reduce((acc, cur) => {
       return acc.concat(cur);
     }, []);
@@ -26,6 +27,7 @@ class StatisticService {
       const item = list.find((item) => item.name === categoryName);
       return item?.count;
     };
+
     const dataCategory = getUniqueListBy(dataCategory1, "name");
     const data = {
       labels,

@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
-import { SearchNavbarValue } from "../recoil/SearchValues";
+import { SearchNavbarValue } from "../store/SearchValues";
 const NavItem = ({ to, name }) => {
   const location = useLocation();
   const css =

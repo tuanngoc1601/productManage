@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 import CategoryApi from "../api/CategoryApi";
-import { CategoriesList } from "../recoil/Products";
+import { CategoriesList } from "../store/CategoryState";
 
 const useGetAllCategory = (depen, searchValue) => {
   const [categories, setCateogries] = useRecoilState(CategoriesList);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -15,9 +16,12 @@ const useGetAllCategory = (depen, searchValue) => {
         toast.error("GET CATEGORY ERR ", error.response.data.message);
       }
     };
+
     getData();
   }, [depen, setCateogries]);
+
   if (!searchValue) return categories;
+
   return categories.filter((category) =>
     category.name.toLowerCase().includes(searchValue.toLowerCase())
   );

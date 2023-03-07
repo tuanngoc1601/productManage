@@ -4,6 +4,7 @@ import ProductApi from "../api/ProductApi";
 const useGetAllProductInfo = (depen) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -15,8 +16,10 @@ const useGetAllProductInfo = (depen) => {
         setLoading(true);
       }
     };
+
     getData();
   }, [depen]);
+
   return { products, loading };
 };
 

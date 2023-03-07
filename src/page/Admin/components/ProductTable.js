@@ -3,8 +3,8 @@ import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import LoadingTable from "../../../components/LoadingTable";
-import { SearchNavbarValue } from "../../../recoil/SearchValues";
 import ProductService from "../../../services/ProductService";
+import { SearchNavbarValue } from "../../../store/SearchValues";
 import { removeAccents } from "../../../utils";
 const ITEM_PER_PAGE = 10;
 const ColorItem = ({ color }) => {

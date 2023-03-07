@@ -5,8 +5,9 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
 import { storage } from "../../../firebase";
-import { ColorsList, SizesList } from "../../../recoil/Products";
 import ProductService from "../../../services/ProductService";
+import { ColorsList } from "../../../store/ColorState";
+import { SizesList } from "../../../store/Products";
 import { isFileImage } from "../../../utils";
 const CreateSubPForm = ({ setSubProduct, subProduct }) => {
   const colors = useRecoilValue(ColorsList);
